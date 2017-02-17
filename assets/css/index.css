@@ -1,0 +1,144 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	outline: 1px solid red;
+}
+body{
+	background-color: #DDDDDD;
+}
+.header{
+	padding-top: 2%;
+	width: 100%;
+	border-bottom:1px solid #666666; 
+	background-color: white;
+}
+.logoHolder{
+	text-align: center;
+	margin: auto;
+}
+.logo{
+	height: auto;
+	text-align: center;
+}
+.logo img{
+	width: auto;
+	height: auto;
+	max-width: 100%;
+}
+.introList{
+	font-size: 0;
+	text-align: center;
+	margin-top: 1%;
+}
+.introList div p{
+	width: 45%;
+	display: inline-block;
+	font-size: 14px;
+}
+.introList div p a{
+	text-decoration: none;
+	color: black;
+}
+.introList div p a:hover{
+	color: #33CCFF;
+}
+
+.searchBar{
+	padding: 0 5% 0;
+}
+#indexSearch{
+	background-image: url(../websiteImg/indexSearch.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+	color: rgba(0,0,0,0);
+}
+.classList_container{
+	margin-top: 2%;
+	text-align: center;
+}
+.classList li{
+	margin-top: 1%;
+	border: 1px solid black;
+	display: inline-block;
+	width: auto;
+	min-width: 8%;
+	padding: 0% 1% 0%;
+	cursor: pointer;
+	color: black;
+}
+.classList li:hover{
+	background-color: #FF8800;
+	border: 1px solid #FF8800;
+	color: white;
+}
+
+/*End of header*/
+.top_article{
+	padding-top: 2%;
+}
+.top_article ul li{
+	display: block;
+	width: 100%;
+	padding: 4% 8% 4%;
+	background-color: white;
+	border: 1px solid black;
+	box-sizing: border-box; 
+}
+.top_article ul li + li{
+	cursor: pointer;
+}
+.content{
+	padding-top: 2%;
+	background-color: #DDDDDD;
+}
+.data_container{
+	padding: 0.5% 1% 0.5%;
+}
+.img img{
+	width: 100%;
+	height: auto;
+}
+.data{
+	float: left;
+	background-color: white;
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+
+.pagination_container{
+	text-align: center;
+	margin: auto;
+}
+
+.newest_article{
+	padding-top: 2%;
+}
+.newest_article ul li{
+	display: block;
+	width: 100%;
+	padding: 4% 8% 4%;
+	background-color: white;
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+.newest_article ul li + li{
+	cursor: pointer;
+}
+
+/*End of body*/
+
+.footer{
+	text-align: center;
+	color: #AAAAAA;
+	clear: both;
+	width: 100%;
+	background-color: #444444;
+	height: 80px;
+	padding-top: 1%;
+}
+.footer div{
+	text-align: center;
+}
+
