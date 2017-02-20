@@ -55,6 +55,9 @@ $route['default_controller'] = 'main_page/index';
 $route['admin_login'] = 'Back_end/admin_login';
 $route['login_process'] = 'Back_end/admin_login_process';
 $route['back_end'] = 'Back_end/back_end_index';
+//新文章
+$route['new_article'] = 'Back_end/new_article';
+$route['tag_search'] = 'back_end/tag_search';
 
 
 $route['404_override'] = '';

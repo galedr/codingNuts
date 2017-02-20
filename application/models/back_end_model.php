@@ -6,6 +6,8 @@ class Back_end_model extends CI_Model
 		$this->load->database();
 	}
 
+	//管理者登入，取得管理者資料
+
 	public function adminLogin($adminAccount, $adminPassword)
 	{
 		$adminCheckStr = "SELECT * FROM admin WHERE a_account = '$adminAccount' AND a_password = '$adminPassword'";
@@ -81,6 +83,19 @@ class Back_end_model extends CI_Model
 	public function article_category()
 	{
 		$queryStr = "SELECT c_title FROM category";
+
+		$rec = $this->db->query($queryStr);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
+	//Tag搜尋過濾資料輸出
+
+	public function tag_search($input_text)
+	{
+		$queryStr = "SELECT t_title FROM tag WHERE t_title LIKE '%$input_text%'";
 
 		$rec = $this->db->query($queryStr);
 

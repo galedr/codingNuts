@@ -123,7 +123,7 @@ class Back_end extends CI_Controller {
 	//管理者登入
 
 	public function admin_login()
-	{
+	{	
 		$this->load->view('desktop/admin_login');
 	}
 
@@ -158,6 +158,79 @@ class Back_end extends CI_Controller {
 		header("location: ".base_url()."back_end");
 
 	}
+
+	//新增文章
+
+	public function new_article()
+	{
+		$this->load->Model('back_end_model');
+
+		$data['admin'] = $this->back_end_model->get_admin_file($_SESSION['codingNuts_admin']);
+		
+		$this->load->view('desktop/new_article', $data);
+	}
+
+	public function add_article()
+	{
+		if (isset($_POST['postTitle']) and ($_POST['postTitle']) != '') {
+			$postTitle = $_POST['postTitle'];
+		}
+		if (isset($_POST['postContent']) and ($_POST['postContent']) != '') {
+			$postContent = $_POST['postContent'];
+		}
+		
+		//若沒有設定日期與類別，用預設套入
+
+		if ($_POST['postDate'] == '立刻發佈') {
+			$postDate = date('y-m-d');
+		} else {
+			$postDate = $_POST['postDate'];
+		}
+
+		if ($_POST['postClass'] == '') {
+			$postClass = "無題";
+		} else {
+			$postClass = $_POST['postClass'];
+		}
+
+		$poster = "蓋爾蘿莉控";
+
+		$insertStr = "INSERT INTO article (title, class, content, poster, date) VALUES ('".$postTitle."', '".$postClass."', '".$postContent."', '".$poster."', '".$postDate."')";
+
+		$this->load->Model('back_end_model');
+		$this->db->query($insertStr);
+
+		echo json_encode(array('status'=>'success'));
+
+	}
+
+	//文章新Tag輸入偵測，相似資料輸出
+
+	public function tag_search()
+	{
+		$input_text = $_POST['search_text'];
+		
+		$this->load->Model('back_end_model');
+	
+		//將搜尋結果作成html 格式回傳
+		$result = array();	
+
+		$data = $this->back_end_model->tag_search($input_text);
+
+		foreach ($data as $key => $tag) {
+			foreach ($tag as $key => $t_title) {
+				$result[] = "<span>".$t_title."</span>";	
+			}
+		}	
+		// continue;
+		
+		
+		$dataReturn = implode(" ", $result);
+		
+		echo json_encode(array('status'=>'success', 'data'=>$dataReturn));
+		
+	}
+
 
 }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 17, 2017 at 04:19 AM
+-- Generation Time: Feb 20, 2017 at 03:10 AM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -28,6 +28,13 @@ CREATE TABLE `admin` (
   `a_nickname` varchar(255) NOT NULL,
   `a_level` int(11) NOT NULL DEFAULT '1' COMMENT '1 = editor , 2 = master'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理者and編輯者資料' ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`a_id`, `a_account`, `a_password`, `a_img`, `a_nickname`, `a_level`) VALUES
+(1, 'galedr', '123', 'assets/adminImg/galedr.jpg', '蓋爾蘿莉控', 1);
 
 -- --------------------------------------------------------
 
@@ -60,6 +67,17 @@ CREATE TABLE `article_category` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `article_tag`
+--
+
+CREATE TABLE `article_tag` (
+  `a_id` int(11) NOT NULL,
+  `t_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `category`
 --
 
@@ -82,6 +100,17 @@ CREATE TABLE `member` (
   `m_nickname` varchar(25) NOT NULL,
   `m_status` enum('正常','停權') NOT NULL DEFAULT '正常'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='會員資料' ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tag`
+--
+
+CREATE TABLE `tag` (
+  `t_id` int(11) NOT NULL,
+  `t_title` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -112,6 +141,12 @@ ALTER TABLE `member`
   ADD PRIMARY KEY (`m_id`);
 
 --
+-- Indexes for table `tag`
+--
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`t_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -119,7 +154,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `article`
 --
@@ -135,3 +170,8 @@ ALTER TABLE `category`
 --
 ALTER TABLE `member`
   MODIFY `m_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tag`
+--
+ALTER TABLE `tag`
+  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT;
