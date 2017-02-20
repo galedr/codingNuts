@@ -58,6 +58,7 @@ $route['back_end'] = 'Back_end/back_end_index';
 //新文章
 $route['new_article'] = 'Back_end/new_article';
 $route['tag_search'] = 'back_end/tag_search';
+$route['add_article'] = 'back_end/add_article';
 
 
 $route['404_override'] = '';

@@ -7,10 +7,12 @@
 		<title>新增文章</title>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/new_article.css">
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/datetimepicker/jquery.datetimepicker.css">
 		<script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/tools/ckfinder/ckfinder.js"></script>
 		<script src="<?php echo base_url(); ?>assets/tools/ckeditor/ckeditor.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/new_article.js"></script>
+		<script src="<?php echo base_url(); ?>assets/datetimepicker/jquery.datetimepicker.min.js"></script>
 	</head>
 	<body>
 				
@@ -120,7 +122,7 @@
 						</div>
 					</li>
 
-					<li class="list-group-item postDate">
+					<!-- <li class="list-group-item postDate">
 						發佈時間 : <span id="postTime"></span>
 					</li>
 					<li class="list-group-item set_postDate">
@@ -133,12 +135,12 @@
 							<label for="setDate">設定時間</label>
 						</div>	
 						<div class="chooseDate">
-							<input type="date" name="postDate">
+							<input type="time" name="postDate">
 						</div>
 						<div>
 							<button class="btn btn-info setDate_submit">確認</button>
 						</div>
-					</li>
+					</li> -->
 				</ul>
 
 			</div>

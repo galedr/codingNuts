@@ -171,7 +171,7 @@ class Back_end extends CI_Controller {
 	}
 
 	public function add_article()
-	{
+	{	
 		if (isset($_POST['postTitle']) and ($_POST['postTitle']) != '') {
 			$postTitle = $_POST['postTitle'];
 		}
@@ -181,11 +181,7 @@ class Back_end extends CI_Controller {
 		
 		//若沒有設定日期與類別，用預設套入
 
-		if ($_POST['postDate'] == '立刻發佈') {
-			$postDate = date('y-m-d');
-		} else {
-			$postDate = $_POST['postDate'];
-		}
+		$postDateTime = date('y-m-t H:i:s');
 
 		if ($_POST['postClass'] == '') {
 			$postClass = "無題";
@@ -193,11 +189,17 @@ class Back_end extends CI_Controller {
 			$postClass = $_POST['postClass'];
 		}
 
-		$poster = "蓋爾蘿莉控";
-
-		$insertStr = "INSERT INTO article (title, class, content, poster, date) VALUES ('".$postTitle."', '".$postClass."', '".$postContent."', '".$poster."', '".$postDate."')";
+		if ($_POST['postTag'] == '') {
+			$postTag = "隨筆";
+		} 
 
 		$this->load->Model('back_end_model');
+
+		$poster = $this->back_end_model->get_admin_file($_SESSION['codingNuts_admin']);
+
+		$poster = $poster[0]['a_nickname'];
+
+		
 		$this->db->query($insertStr);
 
 		echo json_encode(array('status'=>'success'));

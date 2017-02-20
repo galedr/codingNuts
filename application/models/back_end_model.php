@@ -96,7 +96,7 @@ class Back_end_model extends CI_Model
 	public function tag_search($input_text)
 	{
 		$queryStr = "SELECT t_title FROM tag WHERE t_title LIKE '%$input_text%'";
-
+		
 		$rec = $this->db->query($queryStr);
 
 		$result = $rec->result_array($rec);

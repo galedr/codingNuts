@@ -88,7 +88,7 @@ function ckeditor(){
 	})
 
 	//文章Tag輸入內容
-	$('#insertTag').keydown(function(event){
+	$('#insertTag').keyup(function(event){
 
 		if (event.which == 188) {
 
@@ -100,6 +100,14 @@ function ckeditor(){
 
 		var input_text = $('#insertTag').val();
 
+		if (input_text == '') {
+
+			$('.used_tag').empty();
+
+			return;
+
+		}
+		
 		var text_arr = input_text.split(",");
 
 		if (text_arr.length > 1) {
@@ -130,62 +138,62 @@ function ckeditor(){
 
 	//設定日期
 
-	$('.postDate').click(function(){
+	// $('.postDate').click(function(){
 
-		$('.set_postDate').css('display','block');
+	// 	$('.set_postDate').css('display','block');
 
-		$('.postDate').css('background-color','#FFEE99');
+	// 	$('.postDate').css('background-color','#FFEE99');
 
-	})
+	// })
 
-	//日期radio事件，決定現在或設定日期
+	// //日期radio事件，決定現在或設定日期
 
-	$('input[name="setDate"]').change(function(){
+	// $('input[name="setDate"]').change(function(){
 
-		var setDate_way = $('input[name="setDate"]:checked').val();
+	// 	var setDate_way = $('input[name="setDate"]:checked').val();
 
-		if (setDate_way == 'choose') {
+	// 	if (setDate_way == 'choose') {
 
-			$('.chooseDate').css('display','block');
+	// 		$('.chooseDate').css('display','block');
 
-		} else {
+	// 	} else {
 
-			$('.chooseDate').css('display','none');
+	// 		$('.chooseDate').css('display','none');
 
-		}
+	// 	}
 
-	})
+	// })
 
-	//選擇日期
+	// //選擇日期
 
-	$('.setDate_submit').click(function(){
+	// $('.setDate_submit').click(function(){
 
-		var setDate_way = $('input[name="setDate"]:checked').val();
+	// 	var setDate_way = $('input[name="setDate"]:checked').val();
 		
-		if (setDate_way == 'now') {
+	// 	if (setDate_way == 'now') {
 
-			$('#postTime').html('立刻發佈');
+	// 		$('#postTime').html('立刻發佈');
 
-		} else {
+	// 	} else {
 
-			var chooseDate = $('input[name="postDate"]').val();
-			
-			var today = Date();
+	// 		var chooseDate = $('input[name="postDate"]').val();
+	// 		console.log(chooseDate);
+	// 		var today = getDate();
+	// 		console.log(today);
+	// 		if (chooseDate < today) {
+	// 			alert('選則的日期必須是今天以後');
+	// 			$('input[value="now"]').attr('checked','checked');
+	// 		} else {
+	// 			$('#postTime').html(chooseDate);	
+	// 		}
 
-			if (chooseDate < today) {
-				alert('選則的日期必須是今天以後');
-				$('input[value="now"]').attr('checked','checked');
-			} else {
-				$('#postTime').html(chooseDate);	
-			}
+	// 	}
 
-		}
+	// 	$('.set_postDate').css('display','none');
+	// 	$('.postDate').css('background-color','white');
+	// 	$('.chooseDate').css('display','none');
 
-		$('.set_postDate').css('display','none');
-		$('.postDate').css('background-color','white');
-		$('.chooseDate').css('display','none');
-
-	})
+	// })
 
 	//發佈鈕按下後事件
 
@@ -195,9 +203,11 @@ function ckeditor(){
 		
 		var postContent = editor.getData();
 
-		var postDate = $('#postTime').html();
+		// var postDate = $('#postTime').html();
 		
 		var postClass = $('.postClass span').html();
+
+		var postTag = $('#postTag').html();
 
 		if (postTitle != '' && postTitle != undefined) {
 			if (postContent != '' && postContent != undefined) {
@@ -207,8 +217,8 @@ function ckeditor(){
 					type: 'POST',
 					data: {postTitle: postTitle,
 							postContent: postContent,
-							postDate: postDate,
-							postClass: postClass},
+							postClass: postClass,
+							postTag: postTag},
 					dataType: 'JSON',
 					success: function(data){
 						alert('新增文章成功');
