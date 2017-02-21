@@ -54,7 +54,7 @@ class Back_end extends CI_Controller {
 		//取得分頁資料與文章
 
 		$config['base_url'] = site_url(strtolower(__CLASS__).'/'.__FUNCTION__);
-		$config['per_page'] = 10;
+		$config['per_page'] = 2;
 		$config['use_page_numbers'] = true;
 		//套上bootstrap的分頁設定
 		$config['full_tag_open'] = '<li>' ;
@@ -117,7 +117,99 @@ class Back_end extends CI_Controller {
 
 		//所有後台所需資料匯入view
 
-		$this->load->view('desktop/back_end_index', $data);
+		$this->load->view('desktop/back_end_header', $data);
+		$this->load->view('desktop/back_end_index');
+	}
+
+	//後台分類搜尋
+
+	public function back_end_search()
+	{	
+
+		//驗證是否已經登入，如果有，將登入人資訊取出
+
+		if (!isset($_SESSION['codingNuts_admin'])) {
+
+			header("location: ".base_url()."adminLogin");
+
+			echo "
+					alert('請先登入管理員帳號');
+				";
+			
+
+			return;
+		}
+
+		$this->load->Model('back_end_model');
+
+		//取得登入者資料
+
+		$result = $this->back_end_model->get_admin_file($_SESSION['codingNuts_admin']);
+
+		$data['admin'] = $result;
+
+		//取得分頁資料與文章
+
+		$per_page = 2;//每頁顯示筆數
+
+		$num_page = 1;//預設目前頁數
+
+		$range = 2;//當前頁數前後顯示頁碼
+		$data['range'] = $range;
+
+		if (isset($_GET['search_key'])) {
+			$search_key = $_GET['search_key'];
+		}
+		if (isset($_GET['search_txt'])) {
+			$search_txt = $_GET['search_txt'];
+		}
+		if (isset($_GET['num_page'])) {
+			$num_page = $_GET['num_page'];
+		}
+		$data['num_page'] = $num_page;
+		$data['search_key'] = $search_key;
+		$data['search_txt'] = $search_txt;
+
+		if (isset($get_page) and ($get_page) != '') {
+			$num_page = $get_page;
+		}
+		$data['num_page'] = $num_page;
+
+		$start_row = ($num_page - 1)*$per_page;
+
+		$pagi_result = $this->back_end_model->article_search($start_row, $per_page, $search_txt, $search_key);
+
+		$data['num_rows'] = $pagi_result['num_rows'];
+		$data['article_data'] = $pagi_result['article_data'];
+		$data['total_page'] = ceil($pagi_result['total_row']/$per_page);
+
+
+		//頁面所需，文章筆數
+
+		$all_article = $this->back_end_model->all_article();
+
+		$total_num = count($all_article);
+
+		$posted_article = $this->back_end_model->posted_article();
+
+		$posted_num = count($posted_article);
+
+		$draft_article = $this->back_end_model->draft_article();
+
+		$draft_num = count($draft_article);
+
+		$data['article_num'] = array('total_num'=>$total_num,
+									'draft_num'=>$draft_num,
+									'posted_num'=>$posted_num);
+
+		//取出分類
+
+		$data['article_category'] = $this->back_end_model->article_category();
+
+		//所有後台所需資料匯入view
+
+		$this->load->view('desktop/back_end_header', $data);
+		$this->load->view('desktop/back_end_search');
 	}
 
 	//管理者登入
@@ -167,7 +259,8 @@ class Back_end extends CI_Controller {
 
 		$data['admin'] = $this->back_end_model->get_admin_file($_SESSION['codingNuts_admin']);
 		
-		$this->load->view('desktop/new_article', $data);
+		$this->load->view('desktop/back_end_header', $data);
+		$this->load->view('desktop/new_article');
 	}
 
 	public function add_article()
@@ -251,7 +344,7 @@ class Back_end extends CI_Controller {
 			$c_id = $c_id[0]['c_id'];
 
 			$ac_insertStr = "INSERT INTO article_category (c_id,a_id) VALUES ('".$c_id."','".$article_id."')";
-
+			
 			$ac_rec = $this->db->query($ac_insertStr);
 
 		} else {

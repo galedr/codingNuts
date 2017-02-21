@@ -1,3 +1,4 @@
+<?php ini_set("display_errors", "On"); ?>
 <!DOCTYPE html>
 <html lang="">
 	<head>
@@ -90,9 +91,31 @@
 			
 			<div class="article_pagination">
 				<div class="pageStatus">
-					<p>第 <?php echo $now_page; ?> 頁，共 <?php echo $total_rows; ?> 頁</p>
+					<p>第 <?php echo $num_page; ?> 頁，共 <?php echo $total_page; ?> 頁</p>
 					<ul class="pagination pagination-sm">
-						<?php echo $pagi_link; ?>
+						<?php if ($num_page > 1) { ?>
+							<li><a href="<?php echo base_url(); ?>back_end_search?searchKey=<?php echo $search_key; ?>&search_txt=<?php echo $search_txt; ?>&num_page=1">&laquo;</a></li>
+						<?php } ?>
+						<?php 
+							for ($i = (($num_page - $range) - 1); $i < (($num_page + $range) + 1); $i++) {
+
+								if (($i > 0) and ($i <= $total_page)) {
+									
+									if ($i == $num_page) { ?>
+										
+										<li class="active"><a href="javascript:;"><?php echo $i; ?></a></li>
+
+									<?php } else { ?>
+										<li><a href="<?php echo base_url(); ?>back_end_search?search_key=<?php echo $search_key; ?>&search_txt=<?php echo $search_txt; ?>&num_page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+
+									<?php }
+								}
+							}
+						?>
+						<?php if ($num_page < $total_page) { ?>
+							<li><a href="<?php echo base_url(); ?>back_end_search?search_key=<?php echo $search_key; ?>&search_txt=<?php echo $search_txt; ?>&num_page=<?php echo $total_page; ?>">&raquo;</a></li>
+						<?php } ?>
+						
 					</ul>
 				</div>
 			</div>
@@ -103,7 +126,7 @@
 				<table class="table" id="content_table">
 						
 					<?php
-						foreach ($article_row['article_data'] as $key => $value) {
+						foreach ($article_data as $key => $value) {
 					?>	
 
 						<tr>
@@ -140,7 +163,7 @@
 			</div>
 			
 		</div>
-		<?php print_r($article_row); ?>
+		
 		
 		<script>var base_url = "<?php echo base_url(); ?>";</script>
 		<script src="<?php echo base_url(); ?>assets/js/back_end.js"></script>		

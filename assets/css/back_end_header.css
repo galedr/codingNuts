@@ -1,0 +1,35 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	/*outline: 1px solid red;*/
+}
+
+.clearfix{
+	clear: both;
+}
+
+.header{
+	width: 100%;
+	background-color: #DDDDDD;
+	position: relative;
+	padding: 0.5% 2% 0.5%;
+}
+.header div{
+	display: inline-block;
+}
+.adminStatus p, .adminStatus img{
+	display: inline-block;
+}
+.adminStatus img{
+	max-width: 40px;
+	max-height: 40px;
+	border-radius: 50%;
+}
+.adminStatus p+p{
+	margin-right: 7px;
+}
+.adminStatus{
+	position: absolute;
+	right: 2%;
+}

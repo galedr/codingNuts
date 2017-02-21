@@ -66,6 +66,42 @@ class Back_end_model extends CI_Model
 		return $result;
 	}
 
+	public function article_search($start_row, $per_page, $search_txt, $search_key)
+	{
+
+		$queryStr_select = "SELECT * FROM article";
+
+		if ($search_key == 'category') {
+			$queryStr_where = " WHERE c_title = '$search_txt'";
+		} elseif ($search_key == 'tag') {
+			$queryStr_where = " WHERE a_tag LIKE '%$search_txt%'";
+		}
+
+		$queryStr_order_by = " ORDER BY a_id DESC";
+
+		$queryStr_limit = " LIMIT ".$start_row.",".$per_page;
+
+		$queryStr = $queryStr_select.$queryStr_where.$queryStr_order_by.$queryStr_limit;
+
+		//搜尋條件總筆數
+
+		$total_query = $queryStr_select.$queryStr_where.$queryStr_order_by;
+
+		$total_rec = $this->db->query($total_query);
+
+		$total_row = $total_rec->num_rows();
+
+		$result['total_row'] = $total_row;
+
+		$rec = $this->db->query($queryStr);
+
+		$result['num_rows'] = $rec->num_rows();
+
+		$result['article_data'] = $rec->result_array($rec);
+
+		return $result;
+	}
+
 	//已發佈文章，與草稿文章
 
 	public function posted_article()
@@ -138,7 +174,7 @@ class Back_end_model extends CI_Model
 
 		return $result;
 	}
-	
+
 	public function cate_check($c_title)
 	{
 		$queryStr = "SELECT * FROM category WHERE c_title = '$c_title'";

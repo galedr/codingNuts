@@ -7,28 +7,13 @@
 		<title>新增文章</title>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/new_article.css">
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/back_end_header.css">
 		<script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/tools/ckfinder/ckfinder.js"></script>
 		<script src="<?php echo base_url(); ?>assets/tools/ckeditor/ckeditor.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/new_article.js"></script>
 	</head>
 	<body>
-				
-		<div class="header">
-			<div class="logo">
-				<img src="https://api.fnkr.net/testimg/200x40/00CED1/FFF/?text=img+placeholder">
-			</div>
-			<div>
-				<p>nowAction</p>
-			</div>
-			<div class="adminStatus">
-				<p>Welcome, <?php echo $admin[0]['a_nickname']; ?></p>
-				<p><a href="#">登出</a></p>
-				<img src="<?php echo $admin[0]['a_img']; ?>">
-			</div>
-		</div>
-
-		<!-- End of header -->
 
 		<div class="insert_title
 					col-lg-12">
