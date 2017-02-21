@@ -27,13 +27,6 @@
 						}
 					?>
 				</li>
-				<li class="list-group-item bindArticle">	草稿
-					<?php 
-						if ($article_num['draft_num'] > 0) {
-							echo "( ".$article_num['draft_num']." )";
-						}
-					?>
-				</li>
 				<li class="list-group-item bindArticle">	已發佈
 					<?php 
 						if ($article_num['posted_num'] > 0) {
@@ -76,14 +69,17 @@
 						</div>
 					</div>
 					<div class="search_article">
-						<div class="input-group">
-							<input type="text" class="form-control backEnd_search" placeholder="請輸入關鍵字">
-					    	<span class="input-group-btn">
-						    	<button class="btn btn-info" type="button">
-						    		搜尋
-						    	</button>
-						    </span>
-						</div>
+						<form method="get" action="<?php echo base_url(); ?>back_end_search">
+							<div class="input-group">
+								<input type="text" class="form-control backEnd_search" placeholder="請輸入關鍵字" name="search_txt">
+								<input type="hidden" name="search_key" value="tag">
+						    	<span class="input-group-btn">
+							    	<button class="btn btn-info" type="submit">
+							    		搜尋
+							    	</button>
+							    </span>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -110,7 +106,7 @@
 							<td class="article_title">
 								<div>【<?php echo $value['c_title']; ?>】<?php echo $value['a_title']; ?></div>
 								<div class="article_option">
-									<a href="#">編輯</a>/<a href="#">檢視</a>/<a href="<?php echo base_url(); ?>delete_article/<?php echo $value['a_id']; ?>">刪除</a>
+									<a href="<?php echo base_url(); ?>article_edit/<?php echo $value['a_id']; ?>">編輯</a>/<a href="#">檢視</a>/<a href="<?php echo base_url(); ?>delete_article/<?php echo $value['a_id']; ?>">刪除</a>
 								</div>
 							</td>
 							<td class="draft">

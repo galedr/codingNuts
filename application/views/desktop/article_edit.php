@@ -4,14 +4,14 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>新增文章</title>
+		<title>修改文章</title>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/new_article.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/back_end_header.css">
 		<script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/tools/ckfinder/ckfinder.js"></script>
 		<script src="<?php echo base_url(); ?>assets/tools/ckeditor/ckeditor.js"></script>
-		<script src="<?php echo base_url(); ?>assets/js/new_article.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/article_edit.js"></script>
 	</head>
 	<body>
 
@@ -22,7 +22,8 @@
 						col-lg-8">
 				<div class="input-group">
 					<span class="input-group-addon" >文章</span>
-					<input type="text" class="form-control" placeholder="請輸入文章標題" name="postTitle">
+					<input type="text" class="form-control" name="postTitle" value="<?php echo $article_data[0]['a_title']; ?>">
+					<input type="hidden" name="a_id" value="<?php echo $article_data[0]['a_id']; ?>">
 				</div>
 			</div>
 
@@ -45,14 +46,14 @@
 					col-lg-12">
 			<div class="edit_area
 						col-lg-9">
-				<textarea name="postContent" id="postContent" cols="30" rows="10"></textarea>
+				<textarea name="postContent" id="postContent" cols="30" rows="10"><?php echo $article_data[0]['a_content']; ?></textarea>
 			</div>
 			<div class="set_other
 						col-lg-3">
 						
 				<ul class="list-group">
 					<li class="list-group-item postClass">
-						文章分類 : <span></span>
+						文章分類 : <span><?php echo $article_data[0]['c_title']; ?></span>
 					</li>
 					<li class="list-group-item postClass_set">
 						<div class="input-group">
@@ -84,7 +85,7 @@
 					</li>
 
 					<li class="list-group-item postTag">
-						關鍵字 ： <span id="postTag"></span>
+						關鍵字 ： <span id="postTag"><?php echo $article_data[0]['a_tag']; ?></span>
 					</li>
 					<li class="list-group-item postTag_set">
 						<div class="input-group">
@@ -109,7 +110,6 @@
 
 			</div>
 		</div>
-
 		
 		<script>var base_url = '<?php echo base_url(); ?>';</script>
 		<script src="https://code.jquery.com/jquery.js"></script>

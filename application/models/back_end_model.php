@@ -102,22 +102,24 @@ class Back_end_model extends CI_Model
 		return $result;
 	}
 
+	// a_id 找文章
+
+	public function article_row_id($a_id)
+	{
+		$queryStr = "SELECT * FROM article WHERE a_id = '$a_id'";
+
+		$rec = $this->db->query($queryStr);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
 	//已發佈文章，與草稿文章
 
 	public function posted_article()
 	{
 		$artQueryStr = "SELECT * FROM article WHERE a_status = '1' ORDER BY a_id DESC";
-
-		$artRec = $this->db->query($artQueryStr);
-
-		$result = $artRec->result_array($artRec);
-
-		return $result;
-	}
-
-	public function draft_article()
-	{
-		$artQueryStr = "SELECT * FROM article WHERE a_status = '2' ORDER BY a_id DESC";
 
 		$artRec = $this->db->query($artQueryStr);
 

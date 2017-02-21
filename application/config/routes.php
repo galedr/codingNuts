@@ -58,8 +58,11 @@ $route['back_end'] = 'Back_end/back_end_index';
 $route['back_end_search'] = 'Back_end/back_end_search';
 //新文章
 $route['new_article'] = 'Back_end/new_article';
-$route['tag_search'] = 'back_end/tag_search';
-$route['add_article'] = 'back_end/add_article';
+$route['tag_search'] = 'Back_end/tag_search';
+$route['add_article'] = 'Back_end/add_article';
+//修改
+$route['article_edit/(:num)'] = 'Back_end/article_edit/$1';
+$route['article_update'] = 'Back_end/article_update';
 
 
 $route['404_override'] = '';

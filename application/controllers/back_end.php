@@ -103,12 +103,7 @@ class Back_end extends CI_Controller {
 
 		$posted_num = count($posted_article);
 
-		$draft_article = $this->back_end_model->draft_article();
-
-		$draft_num = count($draft_article);
-
 		$data['article_num'] = array('total_num'=>$config['total_rows'],
-									'draft_num'=>$draft_num,
 									'posted_num'=>$posted_num);
 
 		//取出分類
@@ -194,12 +189,7 @@ class Back_end extends CI_Controller {
 
 		$posted_num = count($posted_article);
 
-		$draft_article = $this->back_end_model->draft_article();
-
-		$draft_num = count($draft_article);
-
 		$data['article_num'] = array('total_num'=>$total_num,
-									'draft_num'=>$draft_num,
 									'posted_num'=>$posted_num);
 
 		//取出分類
@@ -389,6 +379,108 @@ class Back_end extends CI_Controller {
 		
 	}
 
+	//修改文章
+
+	public function article_edit($a_id)
+	{
+		$this->load->Model('back_end_model');
+
+		$data['admin'] = $this->back_end_model->get_admin_file($_SESSION['codingNuts_admin']);
+
+		$result = $this->back_end_model->article_row_id($a_id);
+
+		$data['article_data'] = $result;
+
+		$this->load->view('desktop/back_end_header', $data);
+		$this->load->view('desktop/article_edit');
+	}
+
+	public function article_update()
+	{
+
+		$this->load->Model('back_end_model');
+
+		//取得修改頁的值
+		if (isset($_POST['a_id'])) {
+			$a_id = $_POST['a_id'];
+		}
+		if (isset($_POST['postTitle'])) {
+			$postTitle = $_POST['postTitle'];
+		}
+		if (isset($_POST['postContent'])) {
+			$postContent = $_POST['postContent'];
+		}
+		if ($_POST['postClass'] == '') {
+			$postClass = "無題";
+		} else {
+			$postClass = $_POST['postClass'];
+		}
+
+		if ($_POST['postTag'] == '') {
+			$postTag = "隨筆";
+		} else {
+			$postTag = $_POST['postTag'];
+			$tagArr = explode(",", $postTag);
+		}
+
+		$update_article = "UPDATE article SET a_title = '$postTitle', a_content = '$postContent', c_title = '$postClass', a_tag = '$postTag'";
+
+		$updateRec = $this->db->query($update_article);
+
+		// category
+
+		$cate_check = $this->back_end_model->cate_check($postClass);
+
+		if (count($cate_check) == 0) {
+
+			$c_query = "INSERT INTO category (c_title) VALUES ('".$postClass."')";
+
+			$c_rec = $this->db->query($c_query);
+
+		} 
+
+		$get_c_id = $this->back_end_model->cate_check($postClass);
+		
+		$c_id = $get_c_id[0]['c_id'];
+
+		$update_ac = "UPDATE article_category SET c_id = '$c_id' WHERE a_id = '$a_id'";
+
+		$update_ac_rec = $this->db->query($update_ac);
+
+		// tag
+		//重置article_tag雙關聯資料表
+
+		$reset_at = "DELETE FROM article_tag WHERE a_id = '$a_id'";
+
+		$reset_at_rec = $this->db->query($reset_at);
+
+		foreach ($tagArr as $key => $tag) {
+			
+			$tag_check = $this->back_end_model->tag_check($tag);
+			// check table tag
+			if (count($tag_check) == 0) {
+			
+				$tag_query = "INSERT INTO tag (t_title) VALUES ('".$tag."')";
+
+				$tag_rec = $this->db->query($tag_query);
+
+			}
+
+			// check table article_tag
+
+			$t_check = $this->back_end_model->tag_check($tag);
+
+			$reinsert_at = "INSERT INTO article_tag (t_id,a_id) VALUES ('".$t_check[0]['t_id']."','".$a_id."')";
+
+			$reinsert_at_rec = $this->db->query($reinsert_at);
+
+
+		}
+
+		echo json_encode(array('status'=>'success'));
+
+		
+	}
 
 }
 

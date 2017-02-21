@@ -28,13 +28,6 @@
 						}
 					?>
 				</li>
-				<li class="list-group-item bindArticle">	草稿
-					<?php 
-						if ($article_num['draft_num'] > 0) {
-							echo "( ".$article_num['draft_num']." )";
-						}
-					?>
-				</li>
 				<li class="list-group-item bindArticle">	已發佈
 					<?php 
 						if ($article_num['posted_num'] > 0) {
