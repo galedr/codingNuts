@@ -222,7 +222,7 @@ function ckeditor(){
 					dataType: 'JSON',
 					success: function(data){
 						alert('新增文章成功');
-						location.href = base_url+'backEnd';
+						location.href = base_url+'back_end';
 					}
 				})
 

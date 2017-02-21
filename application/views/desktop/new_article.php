@@ -7,12 +7,10 @@
 		<title>新增文章</title>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/new_article.css">
-		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/datetimepicker/jquery.datetimepicker.css">
 		<script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/tools/ckfinder/ckfinder.js"></script>
 		<script src="<?php echo base_url(); ?>assets/tools/ckeditor/ckeditor.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/new_article.js"></script>
-		<script src="<?php echo base_url(); ?>assets/datetimepicker/jquery.datetimepicker.min.js"></script>
 	</head>
 	<body>
 				
@@ -105,7 +103,7 @@
 					</li>
 					<li class="list-group-item postTag_set">
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="新增關鍵字" name="insertTag" id="insertTag">
+							<input type="text" class="form-control" placeholder="關鍵字請間請用半形逗號,做區隔" name="insertTag" id="insertTag">
 							<span class="input-group-btn">
 							<button class="btn btn-info" type="button" id="insertTag_submit">確認</button>
 							</span>

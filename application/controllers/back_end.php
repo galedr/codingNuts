@@ -172,6 +172,8 @@ class Back_end extends CI_Controller {
 
 	public function add_article()
 	{	
+		$this->load->Model('back_end_model');
+
 		if (isset($_POST['postTitle']) and ($_POST['postTitle']) != '') {
 			$postTitle = $_POST['postTitle'];
 		}
@@ -191,16 +193,78 @@ class Back_end extends CI_Controller {
 
 		if ($_POST['postTag'] == '') {
 			$postTag = "隨筆";
-		} 
-
-		$this->load->Model('back_end_model');
+		} else {
+			$postTag = explode(",", $_POST['postTag']);
+		}
 
 		$poster = $this->back_end_model->get_admin_file($_SESSION['codingNuts_admin']);
 
 		$poster = $poster[0]['a_nickname'];
 
+		//取得此篇po文會取得的文章id
+
+		$result = $this->back_end_model->all_article();
+
+		$article_id = $result[0]['a_id']+1;
+
+		//寫入article
+		$insertStr = "INSERT INTO article (a_title,c_title,a_content,a_nickname,a_tag,a_datetime) VALUES ('".$postTitle."','".$postClass."','".$postContent."','".$poster."','".$_POST['postTag']."','".$postDateTime."')";
 		
-		$this->db->query($insertStr);
+		$rec = $this->db->query($insertStr);
+
+		//寫入article_tag, tag
+		foreach ($postTag as $key => $tag) {
+				
+			$tag_count = $this->back_end_model->tag_check($tag);
+
+			if (count($tag_count) == 0) {
+				
+				$t_queryStr = "INSERT INTO tag (t_title) VALUES ('".$tag."')";
+
+				$t_rec = $this->db->query($t_queryStr);
+
+			}
+		}//end of foreach
+		foreach ($postTag as $key => $tag) {
+			
+			$tag_id = $this->back_end_model->tag_check($tag);
+
+			$tag_id = $tag_id[0]['t_id'];
+
+			$at_queryStr = "INSERT INTO article_tag (a_id,t_id) VALUES ('".$article_id."','".$tag_id."')";
+
+			$at_rec = $this->db->query($at_queryStr);
+		}
+
+		//category
+
+		$cate_check = $this->back_end_model->cate_check($postClass);
+
+		if (count($cate_check) == 0) {
+			
+			$c_insertStr = "INSERT INTO category (c_title) VALUES ('".$postClass."')";
+
+			$c_rec = $this->db->query($c_insertStr);
+
+			$c_id = $this->back_end_model->cate_all();
+
+			$c_id = $c_id[0]['c_id'];
+
+			$ac_insertStr = "INSERT INTO article_category (c_id,a_id) VALUES ('".$c_id."','".$article_id."')";
+
+			$ac_rec = $this->db->query($ac_insertStr);
+
+		} else {
+
+			$c_id = $cate_check[0]['c_id'];
+
+			$ac_insertStr = "INSERT INTO article_category (c_id,a_id) VALUES ('".$c_id."','".$article_id."')";
+
+			$ac_rec = $this->db->query($ac_insertStr);
+
+		}
+
+
 
 		echo json_encode(array('status'=>'success'));
 
@@ -225,7 +289,6 @@ class Back_end extends CI_Controller {
 			}
 		}	
 		// continue;
-		
 		
 		$dataReturn = implode(" ", $result);
 		

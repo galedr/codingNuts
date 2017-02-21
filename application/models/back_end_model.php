@@ -32,6 +32,16 @@ class Back_end_model extends CI_Model
 	}
 
 	//後台首頁，文章列表部分
+	public function all_article()
+	{
+		$queryStr = "SELECT * FROM article ORDER BY a_id DESC";
+
+		$rec = $this->db->query($queryStr);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
 
 	public function article_row($offset, $per_page)
 	{
@@ -96,7 +106,43 @@ class Back_end_model extends CI_Model
 	public function tag_search($input_text)
 	{
 		$queryStr = "SELECT t_title FROM tag WHERE t_title LIKE '%$input_text%'";
-		
+
+		$rec = $this->db->query($queryStr);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
+	public function tag_check($tag)
+	{
+		$queryStr = "SELECT * FROM tag WHERE t_title = '$tag'";
+
+		$rec = $this->db->query($queryStr);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+
+	}
+
+	//分類category資料取出
+
+	public function cate_all()
+	{
+		$queryStr = "SELECT * FROM category ORDER BY c_id DESC";
+
+		$rec = $this->db->query($queryStr);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+	
+	public function cate_check($c_title)
+	{
+		$queryStr = "SELECT * FROM category WHERE c_title = '$c_title'";
+
 		$rec = $this->db->query($queryStr);
 
 		$result = $rec->result_array($rec);
