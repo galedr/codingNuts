@@ -136,6 +136,38 @@ function ckeditor(){
 
 	})
 
+	$('.postImg').click(function(){
+
+		$('.img_input').css('display','block');
+
+	})
+
+	$('input[name="a_img"]').change(function(){
+
+		$('.img_preview').css('display','block');
+
+		$('.postImg').html('您選擇的圖片 ：');
+
+		readSRC(this);
+
+	})
+
+	function readSRC(input){
+
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function(e){
+				$('#img_preview').attr('src',e.target.result);
+			}
+
+			reader.readAsDataURL(input.files[0]);
+			var aa = input.files[0];
+			// console.log(aa);
+		}
+	}
+
+
 	//設定日期
 
 	// $('.postDate').click(function(){
@@ -196,47 +228,6 @@ function ckeditor(){
 	// })
 
 	//發佈鈕按下後事件
-
-	$('#submitPost').click(function(){
-		
-		var postTitle = $('input[name="postTitle"]').val();
-		
-		var postContent = editor.getData();
-
-		var a_id = $('input[name="a_id"]').val();
-
-		// var postDate = $('#postTime').html();
-		
-		var postClass = $('.postClass span').html();
-
-		var postTag = $('#postTag').html();
-
-		if (postTitle != '' && postTitle != undefined) {
-			if (postContent != '' && postContent != undefined) {
-				
-				$.ajax({
-					url: base_url+'article_update',
-					type: 'POST',
-					data: {	a_id: a_id,
-							postTitle: postTitle,
-							postContent: postContent,
-							postClass: postClass,
-							postTag: postTag},
-					dataType: 'JSON',
-					success: function(data){
-						alert('修改文章成功');
-						location.href = base_url+'back_end';
-					}
-				})
-
-			} else {
-				alert('內文尚未輸入')
-			}
-		} else {
-			alert('標題尚未輸入');
-		}
-
-	})
 
 }
 

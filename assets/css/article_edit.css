@@ -1,0 +1,158 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	/*outline: 1px solid red;*/
+}
+
+.clearfix{
+	clear: both;
+}
+
+.header{
+	width: 100%;
+	background-color: #DDDDDD;
+	position: relative;
+	padding: 0.5% 2% 0.5%;
+}
+.header div{
+	display: inline-block;
+}
+.adminStatus p, .adminStatus img{
+	display: inline-block;
+}
+.adminStatus p+p{
+	margin-right: 7px;
+}
+.adminStatus{
+	position: absolute;
+	right: 2%;
+}
+.adminStatus img{
+	width: 100%;
+	height: 100%;
+	max-height: 40px;
+	max-width: 40px;
+}
+
+/*End of header*/
+
+.insert_title{
+	margin-top: 1%;
+}
+.titleBar, .controlArea{
+	float: left;
+}
+.controlArea{
+	text-align: right;
+}
+.controlArea div img, .controlArea div p{
+	display: inline-block;
+}
+.controlArea div img{
+	border-radius: 50%;
+}
+.controlArea div, .controlArea button{
+	display: inline-block;
+	margin: 0 1% 0;
+}
+.controlArea img{
+	width: 100%;
+	height: 100%;
+	max-height: 40px;
+	max-width: 40px;
+}
+.post_editor{
+	margin-top: 1%;
+}
+.postClass{
+	cursor: pointer;
+}
+.postClass:hover{
+	background-color: #FFEE99;
+}
+.postClass_set{
+	background-color: #FFEE99;
+	display: none;
+}
+
+.set_already{
+	width: 100%;
+	margin-top: 3%;
+	font-size: 0;
+}
+.set_already p{
+	font-size: 14px;
+}
+.set_already label{
+	font-size: 14px;
+	display: inline-block;
+	padding: 1% 4% 1%;
+	border: 1px solid black;
+	background-color: white;
+}
+.set_already label{
+	display: inline-block;
+}
+.set_already input[type="radio"]{
+	display: none;
+}
+.set_btn_control{
+	text-align: right;
+}
+
+.tag_already{
+	width: 100%;
+	margin-top: 3%;
+	font-size: 0;
+}
+.tag_already p, .tag_already span{
+	font-size: 14px;
+}
+.tag_already div span{
+	font-size: 14px;
+	display: inline-block;
+	padding: 1% 4% 1%;
+	/*border: 1px solid black;
+	background-color: white;
+*/}
+.postTag{
+	cursor: pointer;
+}
+.postTag:hover{
+	background-color: #FFEE99;
+}
+.postTag_set{
+	display: none;
+	background-color: #FFEE99;
+}
+
+.postDate{
+	cursor: pointer;
+	background-color: white;
+}
+.postDate:hover{
+	background-color: #FFEE99;
+}
+.set_postDate{
+	background-color: #FFEE99;
+	display: none;
+}
+.chooseDate{
+	display: none;
+	margin-bottom: 1%;
+}
+.postImg{
+	cursor: pointer;
+}
+.postImg:hover{
+	background-color: #FFEE99;
+}
+
+#img_preview{
+	max-width: 100%;
+	height: auto;
+}
+
+
+

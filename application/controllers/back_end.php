@@ -461,36 +461,94 @@ class Back_end extends CI_Controller {
 		$this->load->view('desktop/article_edit');
 	}
 
-	public function article_update()
+	public function article_update($a_id)
 	{
 
 		$this->load->Model('back_end_model');
 
-		//取得修改頁的值
-		if (isset($_POST['a_id'])) {
-			$a_id = $_POST['a_id'];
-		}
-		if (isset($_POST['postTitle'])) {
+		// CI 表單驗證
+		$this->load->library('form_validation');
+		
+		$config = array(
+			array(
+				'field' => 'postTitle',
+				'label' => '標題',
+				'rules' => 'required',
+				'error' => array(
+					'required' => '%s為必填欄位'),
+				),
+			array(
+				'field' => 'postContent',
+				'label' => '內文',
+				'rules' => 'required',
+				'error' => array(
+					'required' => '請輸入%s'),
+				),
+			// array(
+			// 	'field' => 'a_img',
+			// 	'label' => '主圖',
+			// 	'rules' => 'required',
+			// 	'error' => array(
+			// 		'required' => '%s必須選擇'),
+			// 	),
+			);
+
+		$this->form_validation->set_rules($config);
+
+		if ($this->form_validation->run() == false) {
+			
+			echo "
+				<script>
+					alert('標題，內文，主圖為必填欄位');
+					history.go(-1);
+				</script>
+				 ";
+
+			return;
+		} 
+
+		if (isset($_POST['postTitle']) and ($_POST['postTitle']) != '') {
 			$postTitle = $_POST['postTitle'];
 		}
-		if (isset($_POST['postContent'])) {
+		if (isset($_POST['postContent']) and ($_POST['postContent']) != '') {
 			$postContent = $_POST['postContent'];
 		}
-		if ($_POST['postClass'] == '') {
-			$postClass = "無題";
-		} else {
+		
+		//若沒有設定日期與類別，用預設套入
+
+		$postDateTime = date('y-m-t H:i:s');
+
+		if (isset($_POST['postClass']) and ($_POST['postClass']) != '') {
 			$postClass = $_POST['postClass'];
-		}
-
-		if ($_POST['postTag'] == '') {
-			$postTag = "隨筆";
 		} else {
-			$postTag = $_POST['postTag'];
-			$tagArr = explode(",", $postTag);
+			$postClass = "無分類";
 		}
 
-		$update_article = "UPDATE article SET a_title = '$postTitle', a_content = '$postContent', c_title = '$postClass', a_tag = '$postTag' WHERE a_id = '$a_id'";
+		if (isset($_POST['postTag']) and ($_POST['postTag']) != '') {
+			$postTag = explode(",", $_POST['postTag']);
+		} else {
+			$postTag = "";
+		}
 
+		if (isset($_FILES['a_img']['name']) and ($_FILES['a_img']['name']) != '') {
+			
+			$a_img_name = $_FILES['a_img']['name'];
+			$a_img_tmp = $_FILES['a_img']['tmp_name'];
+
+			move_uploaded_file($a_img_tmp, "assets/img/".$a_img_name);
+
+			$a_img = base_url()."assets/img/".$a_img_name;
+
+		} else {
+
+			$a_img = $_POST['a_img_source'];
+
+		}
+
+		
+
+		$update_article = "UPDATE article SET a_title = '$postTitle', a_content = '$postContent',a_img = '$a_img', c_title = '$postClass', a_tag = '$postTag' WHERE a_id = '$a_id'";
+		
 		$updateRec = $this->db->query($update_article);
 
 		// category
@@ -543,7 +601,7 @@ class Back_end extends CI_Controller {
 
 		}
 
-		echo json_encode(array('status'=>'success'));
+		header("location: ".base_url()."back_end");
 
 		
 	}

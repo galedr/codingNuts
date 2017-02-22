@@ -33,8 +33,6 @@
 						<p>以 <?php echo $admin[0]['a_nickname']; ?> 的身份張貼</p>
 					</div>
 					<button class="btn btn-default" id="submitPost">發佈</button>
-					<button class="btn btn-default">預覽</button>
-					<button class="btn btn-default">關閉</button>
 				</div>
 
 			</div>

@@ -228,23 +228,6 @@ function ckeditor(){
 
 	//發佈鈕按下後事件
 
-	$('#submitPost').click(function(){
-
-		if (postTitle != '' && postTitle != undefined) {
-			if (postContent != '' && postContent != undefined) {
-				
-				// $('#article_form').submit();
-				alert('新增文章成功');
-
-			} else {
-				alert('內文尚未輸入');
-			}
-		} else {
-			alert('標題尚未輸入');
-		}
-
-	})
-
 }
 
 

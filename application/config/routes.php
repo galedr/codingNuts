@@ -62,7 +62,7 @@ $route['tag_search'] = 'Back_end/tag_search';
 $route['add_article'] = 'Back_end/add_article';
 //修改
 $route['article_edit/(:num)'] = 'Back_end/article_edit/$1';
-$route['article_update'] = 'Back_end/article_update';
+$route['article_update/(:num)'] = 'Back_end/article_update/$1';
 
 
 $route['404_override'] = '';
