@@ -165,9 +165,6 @@ class Back_end extends CI_Controller {
 		$data['search_key'] = $search_key;
 		$data['search_txt'] = $search_txt;
 
-		if (isset($get_page) and ($get_page) != '') {
-			$num_page = $get_page;
-		}
 		$data['num_page'] = $num_page;
 
 		$start_row = ($num_page - 1)*$per_page;
@@ -241,6 +238,13 @@ class Back_end extends CI_Controller {
 
 	}
 
+	public function logout()
+	{
+		$this->setsession->admin_unset();
+
+		header("location: ".base_url());
+	}
+
 	//新增文章
 
 	public function new_article()
@@ -257,6 +261,47 @@ class Back_end extends CI_Controller {
 	{	
 		$this->load->Model('back_end_model');
 
+		// CI 表單驗證
+		$this->load->library('form_validation');
+		
+		$config = array(
+			array(
+				'field' => 'postTitle',
+				'label' => '標題',
+				'rules' => 'required',
+				'error' => array(
+					'required' => '%s為必填欄位'),
+				),
+			array(
+				'field' => 'postContent',
+				'label' => '內文',
+				'rules' => 'required',
+				'error' => array(
+					'required' => '請輸入%s'),
+				),
+			// array(
+			// 	'field' => 'a_img',
+			// 	'label' => '主圖',
+			// 	'rules' => 'required',
+			// 	'error' => array(
+			// 		'required' => '%s必須選擇'),
+			// 	),
+			);
+
+		$this->form_validation->set_rules($config);
+
+		if ($this->form_validation->run() == false) {
+			
+			echo "
+				<script>
+					alert('標題，內文，主圖為必填欄位');
+					history.go(-1);
+				</script>
+				 ";
+
+			return;
+		} 
+
 		if (isset($_POST['postTitle']) and ($_POST['postTitle']) != '') {
 			$postTitle = $_POST['postTitle'];
 		}
@@ -268,17 +313,39 @@ class Back_end extends CI_Controller {
 
 		$postDateTime = date('y-m-t H:i:s');
 
-		if ($_POST['postClass'] == '') {
-			$postClass = "無題";
-		} else {
+		if (isset($_POST['postClass']) and ($_POST['postClass']) != '') {
 			$postClass = $_POST['postClass'];
+		} else {
+			$postClass = "無分類";
 		}
 
-		if ($_POST['postTag'] == '') {
-			$postTag = "隨筆";
-		} else {
+		if (isset($_POST['postTag']) and ($_POST['postTag']) != '') {
 			$postTag = explode(",", $_POST['postTag']);
+		} else {
+			$postTag = "";
 		}
+
+		if (isset($_FILES['a_img']['name']) and ($_FILES['a_img']['name']) != '') {
+			
+			$a_img_name = $_FILES['a_img']['name'];
+			$a_img_tmp = $_FILES['a_img']['tmp_name'];
+
+		} else {
+
+			echo "
+				<script>
+					alert('主圖為必填欄位');
+					history.go(-1);
+				</script>
+				 ";
+
+			return;
+
+		}
+
+		move_uploaded_file($a_img_tmp, "assets/img/".$a_img_name);
+
+		$a_img = base_url()."assets/img/".$a_img_name;
 
 		$poster = $this->back_end_model->get_admin_file($_SESSION['codingNuts_admin']);
 
@@ -291,34 +358,37 @@ class Back_end extends CI_Controller {
 		$article_id = $result[0]['a_id']+1;
 
 		//寫入article
-		$insertStr = "INSERT INTO article (a_title,c_title,a_content,a_nickname,a_tag,a_datetime) VALUES ('".$postTitle."','".$postClass."','".$postContent."','".$poster."','".$_POST['postTag']."','".$postDateTime."')";
+		$insertStr = "INSERT INTO article (a_title,c_title,a_content,a_img,a_nickname,a_tag,a_datetime) VALUES ('".$postTitle."','".$postClass."','".$postContent."','".$a_img."','".$poster."','".$_POST['postTag']."','".$postDateTime."')";
 		
 		$rec = $this->db->query($insertStr);
 
 		//寫入article_tag, tag
-		foreach ($postTag as $key => $tag) {
-				
-			$tag_count = $this->back_end_model->tag_check($tag);
-
-			if (count($tag_count) == 0) {
-				
-				$t_queryStr = "INSERT INTO tag (t_title) VALUES ('".$tag."')";
-
-				$t_rec = $this->db->query($t_queryStr);
-
-			}
-		}//end of foreach
-		foreach ($postTag as $key => $tag) {
+		if (is_array($postTag)) {
 			
-			$tag_id = $this->back_end_model->tag_check($tag);
+		
+			foreach ($postTag as $key => $tag) {
+					
+				$tag_count = $this->back_end_model->tag_check($tag);
 
-			$tag_id = $tag_id[0]['t_id'];
+				if (count($tag_count) == 0) {
+					
+					$t_queryStr = "INSERT INTO tag (t_title) VALUES ('".$tag."')";
 
-			$at_queryStr = "INSERT INTO article_tag (a_id,t_id) VALUES ('".$article_id."','".$tag_id."')";
+					$t_rec = $this->db->query($t_queryStr);
 
-			$at_rec = $this->db->query($at_queryStr);
+				}
+			}//end of foreach
+			foreach ($postTag as $key => $tag) {
+				
+				$tag_id = $this->back_end_model->tag_check($tag);
+
+				$tag_id = $tag_id[0]['t_id'];
+
+				$at_queryStr = "INSERT INTO article_tag (a_id,t_id) VALUES ('".$article_id."','".$tag_id."')";
+
+				$at_rec = $this->db->query($at_queryStr);
+			}
 		}
-
 		//category
 
 		$cate_check = $this->back_end_model->cate_check($postClass);
@@ -346,11 +416,7 @@ class Back_end extends CI_Controller {
 			$ac_rec = $this->db->query($ac_insertStr);
 
 		}
-
-
-
-		echo json_encode(array('status'=>'success'));
-
+		header("location: ".base_url()."back_end");
 	}
 
 	//文章新Tag輸入偵測，相似資料輸出
@@ -423,7 +489,7 @@ class Back_end extends CI_Controller {
 			$tagArr = explode(",", $postTag);
 		}
 
-		$update_article = "UPDATE article SET a_title = '$postTitle', a_content = '$postContent', c_title = '$postClass', a_tag = '$postTag'";
+		$update_article = "UPDATE article SET a_title = '$postTitle', a_content = '$postContent', c_title = '$postClass', a_tag = '$postTag' WHERE a_id = '$a_id'";
 
 		$updateRec = $this->db->query($update_article);
 

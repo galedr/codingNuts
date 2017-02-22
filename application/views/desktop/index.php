@@ -143,7 +143,7 @@
 			</div>
 
 		</div>
-
+		<?php var_dump($article_data); ?>
 
 		<script>var base_url = "<?php echo base_url(); ?>";</script>
 		<script src="<?php echo base_url(); ?>assets/js/index.js"></script>
