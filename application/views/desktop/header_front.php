@@ -18,7 +18,7 @@
 			<div class="logoHolder col-lg-12">
 				<div class="logo
 							col-lg-4 col-lg-offset-4">
-					<img src="https://api.fnkr.net/testimg/400x80/00CED1/FFF/?text=Logo">
+					<a href="<?php echo base_url(); ?>"><img src="https://api.fnkr.net/testimg/400x80/00CED1/FFF/?text=Logo"></a>
 				</div>
 			</div>
 
@@ -49,23 +49,29 @@
 				<ul class="classList">
 				<?php  
 					foreach ($category as $key => $cate) {
-						if ($cate['c_title'] == $search_txt) {
-							
-						
-				?>
-	
-							<li style="
-								background-color: #FF8800;
-								border: 1px solid #FF8800;
-								color: white;">
-								<?php echo $cate['c_title']; ?>	
-							</li>
 
-				<?php } else { ?>
-							
+						if(!isset($search_txt)){ ?>
+
 							<li><?php echo $cate['c_title']; ?></li>
 
-				<?php } } ?>
+					<?php } else {
+
+							if ($cate['c_title'] == $search_txt) {	?>
+
+								<li style="
+									background-color: #FF8800;
+									border: 1px solid #FF8800;
+									color: white;">
+									<?php echo $cate['c_title']; ?>	
+								</li>
+								
+						<?php } else { ?>
+
+								<li><?php echo $cate['c_title']; ?></li>
+
+						<?php } ?>
+					<?php } ?>
+				<?php } ?>
 				</ul>
 			</div>
 			
