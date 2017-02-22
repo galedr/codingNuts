@@ -28,7 +28,10 @@ class Main_page extends CI_Controller {
 
 	public function index()
 	{
+
 		$this->load->Model('front_end_model');
+
+		//文章row out
 
 		$per_page = 9;
 
@@ -37,8 +40,8 @@ class Main_page extends CI_Controller {
 		$range = 2;
 		$data['range'] = $range;
 
-		if (isset($_GET['num_page'])) {
-			$num_page = $_GET['num_page'];
+		if (isset($_GET['page'])) {
+			$num_page = $_GET['page'];
 		}
 		$data['num_page'] = $num_page;
 
@@ -50,12 +53,59 @@ class Main_page extends CI_Controller {
 		$data['article_data'] = $pagi_result['article_data'];
 		$data['total_page'] = ceil($pagi_result['num_rows']/$per_page);
 
+		//分類 row out
 
-
+		$data['category'] = $this->front_end_model->category_row();
 
 		$this->load->view('desktop/header_front', $data);
 		$this->load->view('desktop/index');
 		$this->load->view('desktop/footer_front');
-
 	}
+
+	public function index_search()
+	{
+		// if get 關鍵字搜尋
+
+		if (isset($_GET['search_key']) and ($_GET['search_key']) != "") {
+			$search_key = $_GET['search_key'];
+		}
+		if (isset($_GET['search_txt']) and ($_GET['search_txt']) != "") {
+			$search_txt = $_GET['search_txt'];
+		}
+
+		$per_page = 9;
+
+		$num_page = 1;
+
+		$range = 2;
+		$data['range'] = $range;
+
+		if (isset($_GET['page']) and ($_GET['page']) != "") {
+			$num_page = $_GET['page'];
+		}
+		$data['num_page'] = $num_page;
+
+		$start_row = ($num_page - 1)*$per_page;
+
+		$this->load->Model('front_end_model');
+
+		$pagi_result = $this->front_end_model->index_search($start_row, $per_page, $search_key, $search_txt);
+
+		$data['num_rows'] = $pagi_result['num_rows'];
+
+		$data['article_data'] = $pagi_result['article_data'];
+
+		$data['total_page'] = ceil($pagi_result['num_rows']/$per_page);
+
+		$data['search_key'] = $search_key;
+		$data['search_txt'] = $search_txt;
+
+		$data['category'] = $this->front_end_model->category_row();
+
+		$this->load->view('desktop/header_front', $data);
+		$this->load->view('desktop/index_search');
+		$this->load->view('desktop/footer_front');
+			
+	}
+
 }

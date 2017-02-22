@@ -50,6 +50,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'main_page/index';
+$route['index'] = 'Main_page/index';
+//首頁
+$route['header_search'] = 'Main_page/index_search';
 
 //後台
 $route['admin_login'] = 'Back_end/admin_login';

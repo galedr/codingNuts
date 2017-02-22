@@ -4,9 +4,11 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>首頁-文章列表</title>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/index.css">
+		<script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/header_front.js"></script>
+
 		
 	</head>
 	<body>
@@ -32,22 +34,38 @@
 						col-lg-12">
 				<div class="col-lg-4 col-lg-offset-4">
 					<div class="input-group searchBar">
-						<input type="text" class="form-control" placeholder="請輸入關鍵字">
-						<span class="input-group-btn">
-					    	<button class="btn btn-info" id="indexSearch" type="button">搜尋</button>
+						
+						<input type="text" class="form-control" placeholder="請輸入關鍵字" name="search_txt">
+						<input type="hidden" name="search_key" value="tag">
+						<span class="input-group-btn" id="index_search">
+					    	<button class="btn btn-info" type="button">搜尋</button>
 						</span>
+						
 					</div>
 				</div>			
 			</div>
 			<div class="classList_container
 						col-lg-12">
 				<ul class="classList">
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
-					<li>4</li>
-					<li>5</li>
-					<li>6</li>
+				<?php  
+					foreach ($category as $key => $cate) {
+						if ($cate['c_title'] == $search_txt) {
+							
+						
+				?>
+	
+							<li style="
+								background-color: #FF8800;
+								border: 1px solid #FF8800;
+								color: white;">
+								<?php echo $cate['c_title']; ?>	
+							</li>
+
+				<?php } else { ?>
+							
+							<li><?php echo $cate['c_title']; ?></li>
+
+				<?php } } ?>
 				</ul>
 			</div>
 			

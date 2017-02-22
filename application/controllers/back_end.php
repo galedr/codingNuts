@@ -22,6 +22,8 @@ class Back_end extends CI_Controller {
 	{	
 		parent::__construct();
 
+		ob_start();
+
 		$this->load->helper('cookie');
 
 		$this->load->library('setsession');

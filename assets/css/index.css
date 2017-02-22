@@ -2,7 +2,7 @@
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	/*outline: 1px solid red;*/
+	outline: 1px solid red;
 }
 body{
 	background-color: #DDDDDD;
@@ -92,9 +92,12 @@ body{
 .content{
 	padding-top: 2%;
 	background-color: #DDDDDD;
+	min-height: 1500px;
+	position: relative;
 }
 .data_container{
 	padding: 0.5% 1% 0.5%;
+	min-height: 500px;
 }
 .img img{
 	width: 100%;
@@ -105,8 +108,19 @@ body{
 	background-color: white;
 	border: 1px solid black;
 	box-sizing: border-box;
+	min-height: 500px;
+	padding: 2% 2% 2%;
 }
-
+.info{
+	margin-top: 4%;
+}
+.info:before{
+	content: "";
+	display: block;
+	border: 1px solid black;
+	position: relative;
+	top: -5px;
+}
 .pagination_container{
 	text-align: center;
 	margin: auto;
@@ -126,7 +140,11 @@ body{
 .newest_article ul li + li{
 	cursor: pointer;
 }
-
+.pagination_container{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
 /*End of body*/
 
 .footer{
