@@ -20,6 +20,16 @@ class Setsession
 		unset($_SESSION['codingNuts_admin']);
 	}
 
+	public function member_set($key, $value)
+	{
+		$_SESSION[$key] = $value;
+	}
+
+	public function member_unset()
+	{
+		unset($_SESSION['codingNuts_member']);
+	}
+
 
 }
 

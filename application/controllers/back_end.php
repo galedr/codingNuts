@@ -37,7 +37,7 @@ class Back_end extends CI_Controller {
 
 		if (!isset($_SESSION['codingNuts_admin'])) {
 
-			header("location: ".base_url()."adminLogin");
+			header("location: ".base_url()."admin_login");
 
 			echo "
 					alert('請先登入管理員帳號');
@@ -127,7 +127,7 @@ class Back_end extends CI_Controller {
 
 		if (!isset($_SESSION['codingNuts_admin'])) {
 
-			header("location: ".base_url()."adminLogin");
+			header("location: ".base_url()."admin_login");
 
 			echo "
 					alert('請先登入管理員帳號');
@@ -229,7 +229,7 @@ class Back_end extends CI_Controller {
 					</script>
 				";
 
-			header("location: ".base_url()."admi_login");
+			header("location: ".base_url()."admin_login");
 
 			return;
 		}
@@ -526,7 +526,7 @@ class Back_end extends CI_Controller {
 		} else {
 			$postClass = "無分類";
 		}
-
+		// echo $postClass;exit;
 		if (isset($_POST['insertTag']) and ($_POST['insertTag']) != '') {
 			$tagString = $_POST['insertTag'];
 			$postTag = explode(",", $_POST['insertTag']);

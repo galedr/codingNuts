@@ -19,6 +19,7 @@ function getStart(){
 		location.href = base_url+"header_search?search_key="+search_key+"&search_txt="+search_txt;
 
 	})
+
 }
 
 

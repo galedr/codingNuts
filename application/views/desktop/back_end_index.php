@@ -53,8 +53,9 @@
 				<div class="search_control">
 					<div class="selectClass">
 						<div class="dropdown">
-							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">所有分類<b class="caret"></b></a>
+							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">選擇分類<b class="caret"></b></a>
 							<ul class="dropdown-menu" id="article_class">
+								<li><a href="<?php echo base_url(); ?>back_end">所有分類</a></li>
 								<?php
 									foreach ($article_category as $key => $value) {
 										foreach ($value as $key => $value) {
@@ -136,7 +137,7 @@
 			</div>
 			
 		</div>
-		<?php print_r($article_row); ?>
+		
 		
 		<script>var base_url = "<?php echo base_url(); ?>";</script>
 		<script src="<?php echo base_url(); ?>assets/js/back_end.js"></script>		

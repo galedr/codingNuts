@@ -1,6 +1,6 @@
 <div class="header">
 	<div class="logo">
-		<img src="https://api.fnkr.net/testimg/200x40/00CED1/FFF/?text=img+placeholder">
+		<img src="<?php echo base_url(); ?>assets/websiteImg/logo.png" style="width: 100%; height: auto; max-width: 200px;">
 	</div>
 	<div>
 		<p>nowAction</p>

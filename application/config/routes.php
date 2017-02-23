@@ -56,12 +56,17 @@ $route['header_search'] = 'Main_page/index_search';
 
 //文章內頁
 $route['articles/(:num)'] = 'Main_page/articles/$1';
+//會員
+$route['member_login'] = 'Main_page/member_login';
+$route['member_resign'] = 'Main_page/member_resign';
+$route['member_logout'] = 'Main_page/member_logout';
 
 //後台
 $route['admin_login'] = 'Back_end/admin_login';
 $route['login_process'] = 'Back_end/admin_login_process';
 $route['back_end'] = 'Back_end/back_end_index';
 $route['back_end_search'] = 'Back_end/back_end_search';
+$route['logout'] = 'Back_end/logout';
 //新文章
 $route['new_article'] = 'Back_end/new_article';
 $route['tag_search'] = 'Back_end/tag_search';

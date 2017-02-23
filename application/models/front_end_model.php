@@ -52,6 +52,31 @@ class Front_end_model extends CI_Model
 
 	}
 
+	//會員
+
+	public function member_login($member_account, $member_password)
+	{
+		$memberCheckStr = "SELECT * FROM member WHERE m_account = '$member_account' AND m_password = '$member_password'";
+
+		$memberQuery = $this->db->query($memberCheckStr);
+
+		$result = $memberQuery->result_array($memberQuery);
+
+		return $result;
+
+	}
+
+	public function get_member_file($m_account)
+	{
+		$query = "SELECT * FROM member WHERE m_account = '$m_account'";
+
+		$rec = $this->db->query($query);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
 	//文章資訊 by a_id
 
 	public function article($a_id)
@@ -68,7 +93,7 @@ class Front_end_model extends CI_Model
 	public function recommand_article($c_title, $a_id)
 	{
 		$query = "SELECT * FROM article WHERE c_title = '$c_title' AND a_id != '$a_id' ORDER BY a_id DESC";
-		
+
 		$rec = $this->db->query($query);
 
 		$result = $rec->result_array($rec);

@@ -32,10 +32,13 @@
 
 		<div class="recommand_href container
 					col-lg-8 col-lg-offset-2">
+			<div class="container">
+				<p>您可能會有興趣 ： </p>
+			</div>	
 			<?php 
 				foreach ($recommand as $key => $recom) { ?>
 					<div class="recommand_col container
-								col-lg-2">
+								col-lg-2" onclick="window.location='<?php echo base_url(); ?>articles/<?php echo $recom['a_id']; ?>'">
 						<img src="<?php echo $recom['a_img']; ?>">
 						<p><?php echo $recom['a_title']; ?></p>
 					</div>

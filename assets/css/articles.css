@@ -31,8 +31,15 @@ body{
 	margin-bottom: 2%;
 	background-color: white;
 }
+.recommand_href div:first-child{
+	width: 100%;
+	padding: 1% 1% 0.5%;
+	font-size: 16px; 
+	border-bottom: 1px solid black;
+}
 .recommand_col{
 	padding: 1% 1% 1%;
+	cursor: pointer;
 }
 .recommand_col img{
 	width: 100%;

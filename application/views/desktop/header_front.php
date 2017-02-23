@@ -1,3 +1,17 @@
+<?php
+	if (!isset($_SESSION['codingNuts_member'])) {
+
+	 	$login_status = "unloging";
+
+	 } else {
+
+	 	$login_status = "login";
+
+	 	$member = $this->front_end_model->get_member_file($_SESSION['codingNuts_member']);
+
+	 }
+	 $data['login_status'] = $login_status;
+?>
 <!DOCTYPE html>
 <html lang="">
 	<head>
@@ -5,6 +19,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/header_front.css">
 		<script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/header_front.js"></script>
 
@@ -17,7 +32,98 @@
 			<div class="logoHolder col-lg-12">
 				<div class="logo
 							col-lg-4 col-lg-offset-4">
-					<a href="<?php echo base_url(); ?>"><img src="https://api.fnkr.net/testimg/400x80/00CED1/FFF/?text=Logo"></a>
+					<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/websiteImg/logo.png"></a>
+				</div>
+				<div class="member
+							col-lg-2 col-lg-offset-2">
+					<!-- 未登入 -->
+					<?php if ($login_status == 'unloging') { ?>
+						<a data-toggle="modal" href="#member_login">會員登入</a>
+					<?php } else { ?>
+					<!-- 已登入 -->
+						<p>Welcome, <?php echo $member[0]['m_nickname']; ?> / <a href="<?php echo base_url(); ?>member_logout">登出</a></p>
+					<?php } ?>
+				</div>
+			</div>
+			
+			<!-- 會員登入，彈出視窗 -->
+			<div class="modal fade" id="member_login">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">會員登入</h4>
+						</div>
+
+						<form method="post" action="<?php echo base_url(); ?>member_login">
+							<div class="modal-body">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="sample" name="member_account">
+									<span class="input-group-addon" >帳號</span>
+								</div>
+							</div>
+							<div class="modal-body">
+								<div class="input-group">
+									<input type="password" class="form-control" placeholder="sample" name="member_password">
+									<span class="input-group-addon" >密碼</span>
+								</div>
+							</div>
+							<div class="modal-body">
+								<a href="#member_resign" data-toggle="modal" data-dismiss="modal">			還沒有帳號？
+								</a>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+								<button type="submit" class="btn btn-primary">送出</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- 會員註冊，彈出視窗 -->
+			<div class="modal fade" id="member_resign">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">會員註冊</h4>
+						</div>
+
+						<form enctype="multipart/form-data" method="post" action="<?php echo base_url(); ?>member_resign">
+							<div class="modal-body">
+								<div class="img_preview">
+									<img src="">
+								</div>
+								<div>
+									<label for="m_img">選擇會員照片 ：</label>
+									<input type="file" name="m_img" class="form-control">
+								</div>
+								<div>
+									<label for="m_account">請輸入帳號 ：</label>
+									<input type="text" name="m_account" class="form-control">
+								</div>
+								<div>
+									<label for="m_password">請輸入密碼 ：</label>
+									<input type="password" name="m_password" class="form-control">
+								</div>
+								<div>
+									<label for="m_password_re">驗證密碼 ：</label>
+									<input type="password" name="m_password_conf" class="form-control">
+								</div>
+								<div>
+									<label for="m_nickname">輸入您的暱稱 ：</label>
+									<input type="text" name="m_nickname" class="form-control">
+								</div>
+							</div>
+							
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+								<button type="submit" class="btn btn-primary" id="member_resign_btn">註冊</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 

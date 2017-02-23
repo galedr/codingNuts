@@ -55,7 +55,7 @@
 						</li>
 						<li class="list-group-item postClass_set">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="新增分類" name="insertClass">
+								<input type="text" class="form-control" placeholder="新增分類" name="insertClass" value="<?php echo $article_data[0]['c_title']; ?>">
 								<span class="input-group-btn">
 								<button class="btn btn-info" type="button" id="insertClass_submit">確認</button>
 								</span>
@@ -87,7 +87,7 @@
 						</li>
 						<li class="list-group-item postTag_set">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="關鍵字請間請用半形逗號,做區隔" name="insertTag" id="insertTag">
+								<input type="text" class="form-control" placeholder="關鍵字請間請用半形逗號,做區隔" name="insertTag" id="insertTag" value="<?php echo $article_data[0]['a_tag']; ?>">
 								<span class="input-group-btn">
 								<button class="btn btn-info" type="button" id="insertTag_submit">確認</button>
 								</span>
@@ -119,7 +119,7 @@
 				</div>
 			</div>
 		</form>
-
+		<?php var_dump($article_data); ?>
 		<script>var base_url = '<?php echo base_url(); ?>';</script>
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>

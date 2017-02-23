@@ -122,10 +122,150 @@ class Main_page extends CI_Controller {
 
 		$data['recommand'] = $this->front_end_model->recommand_article($result[0]['c_title'], $a_id);
 
-
 		$this->load->view('desktop/header_front', $data);
 		$this->load->view('desktop/articles');
 		$this->load->view('desktop/footer_front');
 	}
+
+	//會員登入登出
+
+	public function member_login()
+	{
+		if (isset($_POST['member_account']) == false or isset($_POST['member_password']) == false) {
+			
+			header("location: ".base_url());
+			return;
+
+		}
+
+		$this->load->Model('front_end_model');
+
+		$result = $this->front_end_model->member_login($_POST['member_account'], $_POST['member_password']);
+		
+		if (count($result) == 0) {
+			
+			echo "
+					<script>
+						alert('您輸入的帳號或密碼有誤喔');
+					</script>
+				";
+
+			header("location: ".base_url());
+
+			return;
+		}
+		
+		$this->setsession->member_set('codingNuts_member', $_POST['member_account']);
+		
+		header("location: ".base_url());
+
+	}
+
+	//會員註冊
+
+	public function member_resign()
+	{
+		$this->load->Model('front_end_model');
+
+		$this->load->library('form_validation');
+
+		$config = array(
+					array(
+						'field' => 'm_account',
+						'label' => 'm_account',
+						'rules' => 'required',
+						),
+					array(
+						'field' => 'm_password',
+						'label' => 'm_password',
+						'rules' => 'required',
+						),
+					array(
+						'field' => 'm_password_conf',
+						'label' => 'm_password_conf',
+						'rules' => 'required|matches[m_password]',
+						),
+
+					);
+
+		$this->form_validation->set_rules($config);
+
+		$m_acc_check = $this->front_end_model->get_member_file($_POST['m_account']);
+
+		if (count($m_acc_check) > 0) {
+			
+			echo "
+				<script>
+					alert('您的帳號已經被使用了');
+					history.go(-1);
+				</script>
+				";
+
+			return;
+
+
+		} elseif ($this->form_validation->run() == false) {
+			
+			echo "
+				<script>
+					alert('密碼與驗證不相符');
+					history.go(-1);
+				</script>
+				";
+
+			return;
+
+		} else {
+
+			$m_account = $_POST['m_account'];
+
+			$m_password = $_POST['m_password'];
+
+			if (isset($_POST['m_nickname']) and ($_POST['m_nickname']) != "") {
+				$m_nickname = $_POST['m_nickname'];
+			} else {
+				$m_nickname = $_POST['m_account'];
+			}
+
+			if (isset($_FILES['m_img']['name']) and ($_FILES['m_img']['name']) != "") {
+
+				$m_img_name = $_FILES['m_img']['name'];
+				$m_img_tmp = $_FILES['m_img']['tmp_name'];
+
+				mkdir("assets/img/memberImg/".$m_account,0777,true);
+				move_uploaded_file($m_img_tmp, "assets/img/memberImg/".$m_account."/".$m_img_name);
+
+				$m_img = base_url()."assets/img/memberImg/".$m_account."/".$m_img_name;
+
+			} else {
+				$m_img = base_url()."assets/img/memberImg/default.jpg";
+			}
+
+			$creat_member = "INSERT INTO member (m_account,m_password,m_img,m_nickname) VALUES ('".$m_account."','".$m_password."','".$m_img."','".$m_nickname."')";
+
+			$cm_rec = $this->db->query($creat_member);
+
+
+			$this->setsession->member_set('codingNuts_member', $_POST['m_account']);
+
+			
+			echo "
+				<script>
+					alert('恭喜您註冊成功');
+					window.location='".base_url()."';
+				</script>
+				";
+		}	
+	}
+
+	public function member_logout()
+	{
+		$this->setsession->member_unset();
+
+		header("location:".base_url());
+	}
+
+
+
 
 }

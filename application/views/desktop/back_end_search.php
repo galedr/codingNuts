@@ -56,6 +56,7 @@
 						<div class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">所有分類<b class="caret"></b></a>
 							<ul class="dropdown-menu" id="article_class">
+								<li><a href="<?php echo base_url(); ?>back_end">所有分類</a></li>
 								<?php
 									foreach ($article_category as $key => $value) {
 										foreach ($value as $key => $value) {
