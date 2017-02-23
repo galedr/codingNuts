@@ -315,14 +315,15 @@ class Back_end extends CI_Controller {
 
 		$postDateTime = date('y-m-t H:i:s');
 
-		if (isset($_POST['postClass']) and ($_POST['postClass']) != '') {
-			$postClass = $_POST['postClass'];
+		if (isset($_POST['insertClass']) and ($_POST['insertClass']) != '') {
+			$postClass = $_POST['insertClass'];
 		} else {
 			$postClass = "無分類";
 		}
-
-		if (isset($_POST['postTag']) and ($_POST['postTag']) != '') {
-			$postTag = explode(",", $_POST['postTag']);
+		
+		if (isset($_POST['insertTag']) and ($_POST['insertTag']) != '') {
+			$tagString = $_POST['insertTag'];
+			$postTag = explode(",", $_POST['insertTag']);
 		} else {
 			$postTag = "";
 		}
@@ -360,7 +361,7 @@ class Back_end extends CI_Controller {
 		$article_id = $result[0]['a_id']+1;
 
 		//寫入article
-		$insertStr = "INSERT INTO article (a_title,c_title,a_content,a_img,a_nickname,a_tag,a_datetime) VALUES ('".$postTitle."','".$postClass."','".$postContent."','".$a_img."','".$poster."','".$_POST['postTag']."','".$postDateTime."')";
+		$insertStr = "INSERT INTO article (a_title,c_title,a_content,a_img,a_nickname,a_tag,a_datetime) VALUES ('".$postTitle."','".$postClass."','".$postContent."','".$a_img."','".$poster."','".$tagString."','".$postDateTime."')";
 		
 		$rec = $this->db->query($insertStr);
 
@@ -520,14 +521,15 @@ class Back_end extends CI_Controller {
 
 		$postDateTime = date('y-m-t H:i:s');
 
-		if (isset($_POST['postClass']) and ($_POST['postClass']) != '') {
-			$postClass = $_POST['postClass'];
+		if (isset($_POST['insertClass']) and ($_POST['insertClass']) != '') {
+			$postClass = $_POST['insertClass'];
 		} else {
 			$postClass = "無分類";
 		}
 
-		if (isset($_POST['postTag']) and ($_POST['postTag']) != '') {
-			$postTag = explode(",", $_POST['postTag']);
+		if (isset($_POST['insertTag']) and ($_POST['insertTag']) != '') {
+			$tagString = $_POST['insertTag'];
+			$postTag = explode(",", $_POST['insertTag']);
 		} else {
 			$postTag = "";
 		}
@@ -549,7 +551,7 @@ class Back_end extends CI_Controller {
 
 		
 
-		$update_article = "UPDATE article SET a_title = '$postTitle', a_content = '$postContent',a_img = '$a_img', c_title = '$postClass', a_tag = '$postTag' WHERE a_id = '$a_id'";
+		$update_article = "UPDATE article SET a_title = '$postTitle', a_content = '$postContent',a_img = '$a_img', c_title = '$postClass', a_tag = '$tagString' WHERE a_id = '$a_id'";
 		
 		$updateRec = $this->db->query($update_article);
 

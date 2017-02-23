@@ -108,4 +108,24 @@ class Main_page extends CI_Controller {
 			
 	}
 
+	public function articles($a_id)
+	{
+		$this->load->Model('front_end_model');
+
+		$data['category'] = $this->front_end_model->category_row();
+
+		$result = $this->front_end_model->article($a_id);
+
+		$data['article'] = $result;
+
+		//取出相關文章
+
+		$data['recommand'] = $this->front_end_model->recommand_article($result[0]['c_title'], $a_id);
+
+
+		$this->load->view('desktop/header_front', $data);
+		$this->load->view('desktop/articles');
+		$this->load->view('desktop/footer_front');
+	}
+
 }

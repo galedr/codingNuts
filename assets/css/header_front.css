@@ -1,0 +1,66 @@
+.header{
+	padding-top: 2%;
+	width: 100%;
+	border-bottom:1px solid #666666; 
+	background-color: white;
+}
+.logoHolder{
+	text-align: center;
+	margin: auto;
+}
+.logo{
+	height: auto;
+	text-align: center;
+}
+.logo img{
+	width: auto;
+	height: auto;
+	max-width: 100%;
+}
+.introList{
+	font-size: 0;
+	text-align: center;
+	margin-top: 1%;
+}
+.introList div p{
+	width: 45%;
+	display: inline-block;
+	font-size: 14px;
+}
+.introList div p a{
+	text-decoration: none;
+	color: black;
+}
+.introList div p a:hover{
+	color: #33CCFF;
+}
+
+.searchBar{
+	padding: 0 5% 0;
+}
+#indexSearch{
+	background-image: url(../websiteImg/indexSearch.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+	color: rgba(0,0,0,0);
+}
+.classList_container{
+	margin-top: 2%;
+	text-align: center;
+}
+.classList li{
+	margin-top: 1%;
+	border: 1px solid black;
+	display: inline-block;
+	width: auto;
+	min-width: 8%;
+	padding: 0% 1% 0%;
+	cursor: pointer;
+	color: black;
+}
+.classList li:hover{
+	background-color: #FF8800;
+	border: 1px solid #FF8800;
+	color: white;
+}

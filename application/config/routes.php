@@ -54,6 +54,9 @@ $route['index'] = 'Main_page/index';
 //首頁
 $route['header_search'] = 'Main_page/index_search';
 
+//文章內頁
+$route['articles/(:num)'] = 'Main_page/articles/$1';
+
 //後台
 $route['admin_login'] = 'Back_end/admin_login';
 $route['login_process'] = 'Back_end/admin_login_process';

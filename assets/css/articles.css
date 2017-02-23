@@ -1,0 +1,45 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+body{
+	background-color: #DDDDDD;
+}
+.article_holder{
+	background-color: white;
+	padding: 4% 2% 4%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+.title{
+	width: 100%;
+}
+.title:after{
+	content: "";
+	display: block;
+	border-bottom: 1px double #AAAAAA;
+	position: relative;
+	bottom: 3px;
+}
+.article{
+	width: 100%;
+	margin-top: 1%;
+}
+.recommand_href{
+	margin-top: 5px;
+	margin-bottom: 2%;
+	background-color: white;
+}
+.recommand_col{
+	padding: 1% 1% 1%;
+}
+.recommand_col img{
+	width: 100%;
+	height: auto;
+}
+
+
+
+
+

@@ -43,10 +43,15 @@
 									<p><?php echo $article['c_title']; ?></p>
 								</div>
 								<div class="img">
-									<img src="https://api.fnkr.net/testimg/350x200/00CED1/FFF/?text=img+placeholder">
+									<img src="<?php echo $article['a_img']; ?>">
 								</div>
 								<div class="info">
-									<?php echo mb_substr($article['a_content'], 0,30,"UTF-8"); ?>
+									
+								</div>
+								<div class="read_more">
+									<button class="btn btn-default" onclick="window.location='<?php base_url(); ?>articles/<?php echo $article['a_id']; ?>'">
+										READ MORE
+									</button>
 								</div>
 							</div>
 						</div>

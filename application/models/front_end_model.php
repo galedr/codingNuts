@@ -52,6 +52,30 @@ class Front_end_model extends CI_Model
 
 	}
 
+	//文章資訊 by a_id
+
+	public function article($a_id)
+	{
+		$query = "SELECT * FROM article WHERE a_id = '$a_id'";
+
+		$rec = $this->db->query($query);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
+	public function recommand_article($c_title, $a_id)
+	{
+		$query = "SELECT * FROM article WHERE c_title = '$c_title' AND a_id != '$a_id' ORDER BY a_id DESC";
+		
+		$rec = $this->db->query($query);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
 	public function category_row()
 	{
 		$queryStr = "SELECT * FROM category";
