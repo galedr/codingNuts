@@ -1,5 +1,5 @@
 *{
-	outline: 1px solid red;
+	/*outline: 1px solid red;*/
 }
 .header{
 	padding-top: 2%;
@@ -71,4 +71,41 @@
 	background-color: #FF8800;
 	border: 1px solid #FF8800;
 	color: white;
+}
+.collect_holder{
+	font-size: 0;
+	margin-top: 2%;
+}
+.collect_holder:hover{
+	transform: scale(1.02, 1.02);
+	border: 2px solid #AAAAAA;
+}
+.collect_holder div{
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+}
+.collect_holder div:nth-child(1){
+	width: 20%
+}
+.collect_holder div:nth-child(1) img{
+	width: 100%;
+	height: auto;
+}
+.collect_holder div:nth-child(2){
+	width: 70%;
+	padding-left: 3%;
+	font-size: 16px;
+	cursor: pointer;
+}
+.collect_holder div:nth-child(3){
+	text-align: center;
+	width: 10%;
+	height: auto;
+	border-left: 1px solid black;
+	box-sizing: border-box;
+}
+.collect_holder div:nth-child(3) img{
+	width:50%;
+	height: auto;
 }

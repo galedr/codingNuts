@@ -265,6 +265,57 @@ class Main_page extends CI_Controller {
 		header("location:".base_url());
 	}
 
+	//收藏
+
+	public function collect_check()
+	{
+
+		if (isset($_POST['a_id'])) {
+			
+			$a_id = $_POST['a_id'];
+
+		}
+
+		$m_account = $_SESSION['codingNuts_member'];
+
+		if (isset($_SESSION['article_collect'][$m_account][$a_id])) {
+			
+			//從有收藏，點擊後變沒收藏
+
+			$collect_status = false;
+
+			$this->setsession->unset_collect($a_id, $m_account);
+
+		} else {
+
+			//從沒收藏，點擊後變有收藏
+
+			$collect_status = true;
+
+			$this->setsession->set_collect($a_id, $m_account);
+
+		}
+
+		echo json_encode(array('status'=>'success','data'=>$collect_status));
+
+	}
+
+	public function unset_collect()
+	{
+
+		if (isset($_POST['a_id'])) {
+			$a_id = $_POST['a_id'];
+		}
+		if (isset($_POST['m_account'])) {
+			$m_account = $_POST['m_account'];
+		}
+
+		$this->setsession->unset_collect($a_id, $m_account);
+
+		echo json_encode(array('status'=>'success'));
+
+	}
+
 
 
 

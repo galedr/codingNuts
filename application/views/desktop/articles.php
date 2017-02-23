@@ -25,7 +25,28 @@
 			<div class="article">
 				<?php echo $article[0]['a_content']; ?>
 			</div>
+			<div class="option">
+				<div>
 
+					<?php //檢查本篇文章是否有被收藏
+						if (isset($_SESSION['article_collect'][$_SESSION['codingNuts_member']][$article[0]['a_id']])) {
+							$bgc = base_url()."assets/websiteImg/heart_red.png";
+						} else {
+							$bgc = base_url()."assets/websiteImg/heart_black.png";
+						}
+
+						if (isset($_SESSION['codingNuts_member'])) {
+					?>
+
+						<img src="<?php echo $bgc; ?>" onclick="collect_check(<?php echo $article[0]['a_id']; ?>)" id="collect_img">
+
+					<?php } else { ?>
+						
+						<img src="<?php echo $bgc; ?>" onclick="alert('請先登入會員')" id="collect_img">
+
+					<?php } ?>
+				</div>
+			</div>
 		</div>
 		
 		<!-- 推薦相關文章 -->

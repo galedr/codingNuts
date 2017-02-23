@@ -26,6 +26,23 @@ body{
 	width: 100%;
 	margin-top: 1%;
 }
+.article_holder{
+	position: relative;
+	padding-bottom: 150px;
+}
+.option{
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 0% 3% 0%;
+	border-top: 1px solid black;
+	box-sizing: border-box;
+}
+.option img{
+	width: 50px;
+	cursor: pointer;
+}
 .recommand_href{
 	margin-top: 5px;
 	margin-bottom: 2%;

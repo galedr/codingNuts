@@ -9,8 +9,17 @@
 
 	 	$member = $this->front_end_model->get_member_file($_SESSION['codingNuts_member']);
 
+	 	if (isset($_SESSION['article_collect'][$_SESSION['codingNuts_member']])) {
+	 			
+	 		$collect = $_SESSION['article_collect'][$_SESSION['codingNuts_member']];
+
+	 		$collect_article = array();
+	 		foreach ($collect as $art => $value) {
+	 			
+	 			$collect_article[] = $this->front_end_model->article($art);
+	 		}
+		 }
 	 }
-	 $data['login_status'] = $login_status;
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -41,7 +50,8 @@
 						<a data-toggle="modal" href="#member_login">會員登入</a>
 					<?php } else { ?>
 					<!-- 已登入 -->
-						<p>Welcome, <?php echo $member[0]['m_nickname']; ?> / <a href="<?php echo base_url(); ?>member_logout">登出</a></p>
+						<p>Welcome, <?php echo $member[0]['m_nickname']; ?> / <a href="#m_collect" data-toggle="modal">收藏</a> / <a href="<?php echo base_url(); ?>member_logout">登出</a>
+						</p>
 					<?php } ?>
 				</div>
 			</div>
@@ -126,6 +136,37 @@
 					</div>
 				</div>
 			</div>
+			
+			<!-- 會員收藏，彈出視窗 -->
+			<div class="modal fade" id="m_collect">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">我的收藏</h4>
+						</div>
+						<div class="modal-body">
+							<?php foreach ($collect_article as $key => $collect) { ?>
+							<div class="collect_holder">
+								<div>
+									<img src="<?php echo $collect[0]['a_img']; ?>">
+								</div>
+								<div onclick="window.location='<?php echo base_url(); ?>articles/<?php echo $collect[0]['a_id']; ?>'">
+									<p><?php echo $collect[0]['a_title']; ?></p>
+								</div>
+								<div>
+									<img src="<?php echo base_url(); ?>assets/websiteImg/delete.png" onclick="unset_collect(<?php echo $collect[0]['a_id']; ?>,'<?php echo $_SESSION['codingNuts_member']; ?>')">
+								</div>
+							</div>
+							<?php } ?>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">離開</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 
 			<div class="introList
 						col-lg-12">

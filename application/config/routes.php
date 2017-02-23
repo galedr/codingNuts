@@ -56,6 +56,8 @@ $route['header_search'] = 'Main_page/index_search';
 
 //文章內頁
 $route['articles/(:num)'] = 'Main_page/articles/$1';
+$route['collect_check'] = 'Main_page/collect_check';
+$route['unset_collect'] = 'Main_page/unset_collect';
 //會員
 $route['member_login'] = 'Main_page/member_login';
 $route['member_resign'] = 'Main_page/member_resign';
