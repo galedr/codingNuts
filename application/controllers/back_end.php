@@ -254,6 +254,10 @@ class Back_end extends CI_Controller {
 		$this->load->Model('back_end_model');
 
 		$data['admin'] = $this->back_end_model->get_admin_file($_SESSION['codingNuts_admin']);
+
+		//取得已有分類
+
+		$data['used_category'] = $this->back_end_model->cate_all();
 		
 		$this->load->view('desktop/back_end_header', $data);
 		$this->load->view('desktop/new_article');
@@ -467,6 +471,8 @@ class Back_end extends CI_Controller {
 		$result = $this->back_end_model->article_row_id($a_id);
 
 		$data['article_data'] = $result;
+
+		$data['used_category'] = $this->back_end_model->cate_all();
 
 		$this->load->view('desktop/back_end_header', $data);
 		$this->load->view('desktop/article_edit');

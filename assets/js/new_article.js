@@ -34,21 +34,11 @@ function ckeditor(){
 
 		$('label[for="'+label_id+'"]').css('background-color','#FF8800');
 		$('label[for="'+label_id+'"]').css('color','white');
+
+		//選取後變更 input 的 value
+
+		$('input[name="insertClass"]').attr('value',label_id);
 		
-	})
-
-	//從舊有文章類別選擇
-
-	$('#setClass_submit').click(function(){
-
-		var selected_class = $('input[name="usedClass"]:checked').val();
-
-		$('.postClass span').html(selected_class);
-
-		$('.postClass_set').css('display','none');
-
-		$('.postClass').css('background-color','white');
-
 	})
 
 	//新輸入的文章分類

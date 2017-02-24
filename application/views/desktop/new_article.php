@@ -63,13 +63,11 @@
 								<p>或從已有的分類中選取 ：</p>
 
 								<!-- labrl for，label夾的文字，input的name，value 四者必須一樣 -->
-
-								<label for="class01">這是</label>
-								<input type="radio" name="usedClass" value="class01" id="class01">
+								<?php foreach ($used_category as $key => $uc) { ?>
+									<label for="cate_<?php echo $uc['c_id']; ?>"><?php echo $uc['c_title']; ?></label>
+									<input type="radio" name="usedClass" value="<?php echo $uc['c_title']; ?>" id="cate_<?php echo $uc['c_id']; ?>">
+								<?php } ?>
 								
-								<div class="set_btn_control">
-									<button class="btn btn-info" id="setClass_submit">確認</button>
-								</div>
 							</div>
 							
 						</li>

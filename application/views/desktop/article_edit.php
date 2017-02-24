@@ -64,20 +64,12 @@
 								<p>或從已有的分類中選取 ：</p>
 
 								<!-- labrl for，label夾的文字，input的name，value 四者必須一樣 -->
+								
+								<?php foreach ($used_category as $key => $uc) { ?>
+									<label for="cate_<?php echo $uc['c_id']; ?>"><?php echo $uc['c_title']; ?></label>
+									<input type="radio" name="usedClass" value="<?php echo $uc['c_title']; ?>" id="cate_<?php echo $uc['c_id']; ?>">
+								<?php } ?>
 
-								<label for="class01">這是</label>
-								<input type="radio" name="usedClass" value="class01" id="class01">
-								<label for="class02">這是</label>
-								<input type="radio" name="usedClass" value="class02" id="class02">
-								<label for="class03">這是</label>
-								<input type="radio" name="usedClass" value="class03" id="class03">
-								<label for="class04">這是</label>
-								<input type="radio" name="usedClass" value="class04" id="class04">
-								<label for="class111105">這是</label>
-								<input type="radio" name="usedClass" value="class111105" id="class111105">
-								<div class="set_btn_control">
-									<button class="btn btn-info" id="setClass_submit">確認</button>
-								</div>
 							</div>
 							
 						</li>
@@ -114,12 +106,19 @@
 							<input type="hidden" name="a_img_source" value="<?php echo $article_data[0]['a_img']; ?>">
 						</li>
 
+						<li class="list-group-item">
+							文章簡介 ：
+						</li>
+						<li class="list-group-item">
+							<textarea name="a_intro" cols="30" rows="5" class="form-control"><?php echo $article_data[0]['a_intro']; ?></textarea>
+						</li>
+
 					</ul>
 
 				</div>
 			</div>
 		</form>
-		<?php var_dump($article_data); ?>
+		
 		<script>var base_url = '<?php echo base_url(); ?>';</script>
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
