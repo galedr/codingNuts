@@ -66,14 +66,7 @@
 
 								<label for="class01">這是</label>
 								<input type="radio" name="usedClass" value="class01" id="class01">
-								<label for="class02">這是</label>
-								<input type="radio" name="usedClass" value="class02" id="class02">
-								<label for="class03">這是</label>
-								<input type="radio" name="usedClass" value="class03" id="class03">
-								<label for="class04">這是</label>
-								<input type="radio" name="usedClass" value="class04" id="class04">
-								<label for="class111105">這是</label>
-								<input type="radio" name="usedClass" value="class111105" id="class111105">
+								
 								<div class="set_btn_control">
 									<button class="btn btn-info" id="setClass_submit">確認</button>
 								</div>
@@ -110,6 +103,13 @@
 						</li>
 						<li class="list-group-item img_preview">
 							<img src="" id="img_preview">
+						</li>
+						
+						<li class="list-group-item">
+							文章簡介 ：
+						</li>
+						<li class="list-group-item">
+							<textarea name="a_intro" cols="30" rows="5" class="form-control"></textarea>
 						</li>
 
 					</ul>

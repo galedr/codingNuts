@@ -18,13 +18,13 @@
 						col-lg-2">
 				<ul>
 					<li>最新文章 ： </li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, laborum?</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, rerum.</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quo.</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, omnis!</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, possimus.</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, possimus.</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, possimus.</li>
+					<?php foreach ($newest_article as $key => $article) { ?>
+						<li
+							style="cursor: pointer;"
+							onclick="window.location='<?php echo base_url(); ?>articles/<?php echo $article['a_id']; ?>'">
+							<?php echo $article['a_title']; ?>
+						</li>	
+					<? } ?>
 				</ul>
 							
 			</div>

@@ -79,11 +79,13 @@ function ckeditor(){
 
 	$('#insertTag_submit').click(function(){
 
-		$('.postTag_set').css('display','none');
-
 		var post_tag = $('#insertTag').val();
 
 		$('#postTag').html(post_tag);
+
+		$('.postTag_set').css('display','none');
+
+		$('.postTag').css('background-color','white');
 
 	})
 

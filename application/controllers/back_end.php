@@ -281,6 +281,11 @@ class Back_end extends CI_Controller {
 				'error' => array(
 					'required' => '請輸入%s'),
 				),
+			array(
+				'field' => 'a_intro',
+				'label' => 'a_intro',
+				'rules' => 'required',
+				),
 			// array(
 			// 	'field' => 'a_img',
 			// 	'label' => '主圖',
@@ -296,7 +301,7 @@ class Back_end extends CI_Controller {
 			
 			echo "
 				<script>
-					alert('標題，內文，主圖為必填欄位');
+					alert('標題，內文，主圖，簡介為必填欄位');
 					history.go(-1);
 				</script>
 				 ";
@@ -309,6 +314,9 @@ class Back_end extends CI_Controller {
 		}
 		if (isset($_POST['postContent']) and ($_POST['postContent']) != '') {
 			$postContent = $_POST['postContent'];
+		}
+		if (isset($_POST['a_intro']) and ($_POST['a_intro']) != "") {
+			$a_intro = $_POST['a_intro'];
 		}
 		
 		//若沒有設定日期與類別，用預設套入
@@ -361,7 +369,7 @@ class Back_end extends CI_Controller {
 		$article_id = $result[0]['a_id']+1;
 
 		//寫入article
-		$insertStr = "INSERT INTO article (a_title,c_title,a_content,a_img,a_nickname,a_tag,a_datetime) VALUES ('".$postTitle."','".$postClass."','".$postContent."','".$a_img."','".$poster."','".$tagString."','".$postDateTime."')";
+		$insertStr = "INSERT INTO article (a_title,c_title,a_intro,a_content,a_img,a_nickname,a_tag,a_datetime) VALUES ('".$postTitle."','".$postClass."','".$a_intro."','".$postContent."','".$a_img."','".$poster."','".$tagString."','".$postDateTime."')";
 		
 		$rec = $this->db->query($insertStr);
 
@@ -487,6 +495,11 @@ class Back_end extends CI_Controller {
 				'error' => array(
 					'required' => '請輸入%s'),
 				),
+			array(
+				'field' => 'a_intro',
+				'label' => 'a_intro',
+				'rules' => 'required',
+				),
 			// array(
 			// 	'field' => 'a_img',
 			// 	'label' => '主圖',
@@ -515,6 +528,9 @@ class Back_end extends CI_Controller {
 		}
 		if (isset($_POST['postContent']) and ($_POST['postContent']) != '') {
 			$postContent = $_POST['postContent'];
+		}
+		if (isset($_POST['a_intro']) and ($_POST['a_intro']) != "") {
+			$a_intro = $_POST['a_intro'];
 		}
 		
 		//若沒有設定日期與類別，用預設套入
@@ -551,7 +567,7 @@ class Back_end extends CI_Controller {
 
 		
 
-		$update_article = "UPDATE article SET a_title = '$postTitle', a_content = '$postContent',a_img = '$a_img', c_title = '$postClass', a_tag = '$tagString' WHERE a_id = '$a_id'";
+		$update_article = "UPDATE article SET a_title = '$postTitle', a_content = '$postContent',a_img = '$a_img', c_title = '$postClass', a_tag = '$tagString', a_intro = '$a_intro' WHERE a_id = '$a_id'";
 		
 		$updateRec = $this->db->query($update_article);
 
