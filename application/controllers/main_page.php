@@ -57,6 +57,10 @@ class Main_page extends CI_Controller {
 
 		$data['category'] = $this->front_end_model->category_row();
 
+		//最新文章
+
+		$data['newest_article'] = $this->front_end_model->newest_article();
+
 		$this->load->view('desktop/header_front', $data);
 		$this->load->view('desktop/index');
 		$this->load->view('desktop/footer_front');

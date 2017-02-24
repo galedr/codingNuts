@@ -17,7 +17,7 @@
 			<div class="top_article
 						col-lg-2">
 				<ul>
-					<li>熱門收藏文章 ： </li>
+					<li>最新文章 ： </li>
 					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, laborum?</li>
 					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, rerum.</li>
 					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quo.</li>
@@ -82,20 +82,6 @@
 					  	<?php } ?>
 					</ul>
 				</div>
-			</div>
-			
-			<div class="newest_article
-						col-lg-2">
-				<ul>
-					<li>最新文章 ： </li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, similique?</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, illo!</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, inventore.</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, voluptate.</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, quasi.</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, possimus.</li>
-					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, possimus.</li>
-				</ul>
 			</div>
 
 		</div>

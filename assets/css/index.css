@@ -89,6 +89,9 @@ body{
 .top_article ul li + li{
 	cursor: pointer;
 }
+.top_article ul li + li:hover{
+	background-color: #DDDDDD;
+}
 .content{
 	padding-top: 2%;
 	background-color: #DDDDDD;

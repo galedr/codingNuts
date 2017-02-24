@@ -52,6 +52,17 @@ class Front_end_model extends CI_Model
 
 	}
 
+	public function newest_article()
+	{
+		$query = "SELECT * FROM article ORDER BY a_id DESC LIMIT 0,7";
+
+		$rec = $this->db->query($query);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
 	//會員
 
 	public function member_login($member_account, $member_password)
