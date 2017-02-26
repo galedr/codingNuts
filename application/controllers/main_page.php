@@ -57,11 +57,9 @@ class Main_page extends CI_Controller {
 
 		$data['total_page'] = ceil((count($all_article))/$per_page);
 
-		$pagi_result = $this->front_end_model->article_row($start_row, $per_page);
-
-		$data['num_rows'] = $pagi_result['num_rows'];
-		$data['article_data'] = $pagi_result['article_data'];
-		$data['total_page'] = ceil($pagi_result['num_rows']/$per_page);
+		$data['num_rows'] = count($all_article);
+		$data['article_data'] = $all_article;
+		$data['total_page'] = ceil(count($all_article)/$per_page);
 
 		//分類 row out
 
