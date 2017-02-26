@@ -47,6 +47,16 @@ class Main_page extends CI_Controller {
 
 		$start_row = ($num_page - 1)*$per_page;
 
+		//引入 json 檔
+
+		$json_data = file_get_contents("json_files/all_article.json");
+
+		$all_article = json_decode($json_data, true);
+
+		$data['article_data'] = array_slice($all_article, $start_row, $per_page);
+
+		$data['total_page'] = ceil((count($all_article))/$per_page);
+
 		$pagi_result = $this->front_end_model->article_row($start_row, $per_page);
 
 		$data['num_rows'] = $pagi_result['num_rows'];
@@ -323,8 +333,6 @@ class Main_page extends CI_Controller {
 		echo json_encode(array('status'=>'success'));
 
 	}
-
-
 
 
 }

@@ -1,6 +1,8 @@
 <div class="header">
 	<div class="logo">
-		<img src="<?php echo base_url(); ?>assets/websiteImg/logo.png" style="width: 100%; height: auto; max-width: 200px;">
+		<img src="<?php echo base_url(); ?>assets/websiteImg/logo.png" 
+			style="width: 100%; height: auto; max-width: 200px; cursor: pointer;"
+			onclick="window.location='<?php echo base_url(); ?>back_end'">
 	</div>
 	<div>
 		<p>nowAction</p>

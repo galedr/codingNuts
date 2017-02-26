@@ -56,7 +56,7 @@ class Back_end extends CI_Controller {
 		//取得分頁資料與文章
 
 		$config['base_url'] = site_url(strtolower(__CLASS__).'/'.__FUNCTION__);
-		$config['per_page'] = 2;
+		$config['per_page'] = 10;
 		$config['use_page_numbers'] = true;
 		//套上bootstrap的分頁設定
 		$config['full_tag_open'] = '<li>' ;
@@ -147,7 +147,7 @@ class Back_end extends CI_Controller {
 
 		//取得分頁資料與文章
 
-		$per_page = 2;//每頁顯示筆數
+		$per_page = 10;//每頁顯示筆數
 
 		$num_page = 1;//預設目前頁數
 

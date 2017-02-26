@@ -77,6 +77,9 @@ $route['add_article'] = 'Back_end/add_article';
 $route['article_edit/(:num)'] = 'Back_end/article_edit/$1';
 $route['article_update/(:num)'] = 'Back_end/article_update/$1';
 
+//撈資料 pull_data
+$route['all_article'] = 'Pull_data/all_article';
+$route['test'] = 'Pull_data/test';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
