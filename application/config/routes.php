@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'main_page/index';
+$route['default_controller'] = 'Main_page/index';
 $route['index'] = 'Main_page/index';
 //首頁
 $route['header_search'] = 'Main_page/index_search';
@@ -79,7 +79,7 @@ $route['article_update/(:num)'] = 'Back_end/article_update/$1';
 
 //撈資料 pull_data
 $route['all_article'] = 'Pull_data/all_article';
-$route['test'] = 'Pull_data/test';
+$route['reset_category_article'] = 'Pull_data/reset_category_article';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

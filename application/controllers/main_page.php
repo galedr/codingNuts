@@ -49,6 +49,7 @@ class Main_page extends CI_Controller {
 
 		//引入 json 檔
 
+
 		$json_data = file_get_contents("json_files/all_article.json");
 
 		$all_article = json_decode($json_data, true);
