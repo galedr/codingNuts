@@ -1,4 +1,4 @@
-<?php ini_set("display_errors", "On"); ?>
+<?php error_reporting(0); ?>
 <!DOCTYPE html>
 <html lang="">
 	<head>
@@ -205,6 +205,7 @@
 		</div>
 		
 		
+
 		<script>var base_url = "<?php echo base_url(); ?>";</script>
 		<script src="<?php echo base_url(); ?>assets/js/back_end.js"></script>		
 		<script src="https://code.jquery.com/jquery.js"></script>

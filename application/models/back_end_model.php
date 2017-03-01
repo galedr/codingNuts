@@ -130,7 +130,7 @@ class Back_end_model extends CI_Model
 
 	public function article_category()
 	{
-		$queryStr = "SELECT c_title FROM category";
+		$queryStr = "SELECT * FROM category";
 
 		$rec = $this->db->query($queryStr);
 
