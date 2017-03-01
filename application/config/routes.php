@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'Main_page/index';
-$route['index'] = 'Main_page/index';
+$route['home/(:any)'] = 'Main_page/index_pagination/$1';
 //首頁
 $route['header_search/(:any)/(:any)/(:num)'] = 'Main_page/index_search/$1/$2/$3';
 

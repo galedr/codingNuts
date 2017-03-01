@@ -64,22 +64,22 @@
 					<ul class="pagination pagination-sm">
 						
 						<?php if ($num_page > 1){ ?>
-					 		<li><a href="<?php echo base_url(); ?>index?page=1">&laquo;</a></li>
+					 		<li><a href="<?php echo base_url(); ?>home/1">&laquo;</a></li>
 					 	<?php } ?>
 					 	<?php
 					 		for ($i = (($num_page - $range) - 1); $i < (($num_page + $range) + 1) ; $i++) { 
 					 			if (($i > 0) and ($i <= $total_page)) {
 					 				if ($i == $num_page) { ?>
-					 					<li class="active"><a href="#"><?php echo $num_page; ?></a></li>
+					 					<li class="active"><a href="javascript:;"><?php echo $num_page; ?></a></li>
 					 				<?php } else { ?>
-										<li><a href="<?php echo base_url(); ?>index?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+										<li><a href="<?php echo base_url(); ?>home/<?php echo $i; ?>"><?php echo $i; ?></a></li>
 					 				<?php }
 					 			}
 					 		}
 					 	 ?>
 					  	
 						<?php if ($num_page < $total_page) { ?>
-					  		<li><a href="<?php echo base_url(); ?>index?page=<?php echo $total_page; ?>">&raquo;</a></li>
+					  		<li><a href="<?php echo base_url(); ?>home/<?php echo $total_page; ?>">&raquo;</a></li>
 					  	<?php } ?>
 					</ul>
 				</div>
