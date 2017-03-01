@@ -75,20 +75,28 @@ class Main_page extends CI_Controller {
 		$this->load->view('desktop/footer_front');
 	}
 
-	public function index_search()
+	public function index_search($search_key, $search_txt, $num_page)
 	{
 		// if get 關鍵字搜尋
 
-		if (isset($_GET['search_key']) and ($_GET['search_key']) != "") {
-			$search_key = $_GET['search_key'];
-		}
-		if (isset($_GET['search_txt']) and ($_GET['search_txt']) != "") {
-			$search_txt = $_GET['search_txt'];
+		$data['search_key'] = $search_key;
+		$data['search_txt'] = $search_txt;
+
+		$this->load->Model('front_end_model');
+
+		if ($search_key == 'category') {
+			$cate = $this->front_end_model->category_search($search_txt);
+			$search_txt = $cate[0]['c_title'];
 		}
 
-		$per_page = 9;
+		if ($search_key == 'tag') {
+			if (isset($_POST['search_txt'])) {
+				$search_txt = $_POST['search_txt'];
+				$data['post_txt'] = $search_txt;
+			}
+		}
 
-		$num_page = 1;
+		$per_page = 1;
 
 		$range = 2;
 		$data['range'] = $range;
@@ -96,6 +104,7 @@ class Main_page extends CI_Controller {
 		if (isset($_GET['page']) and ($_GET['page']) != "") {
 			$num_page = $_GET['page'];
 		}
+
 		$data['num_page'] = $num_page;
 
 		$start_row = ($num_page - 1)*$per_page;
@@ -109,9 +118,6 @@ class Main_page extends CI_Controller {
 		$data['article_data'] = $pagi_result['article_data'];
 
 		$data['total_page'] = ceil($pagi_result['num_rows']/$per_page);
-
-		$data['search_key'] = $search_key;
-		$data['search_txt'] = $search_txt;
 
 		$data['category'] = $this->front_end_model->category_row();
 

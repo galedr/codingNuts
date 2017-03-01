@@ -32,6 +32,7 @@ class Front_end_model extends CI_Model
 		$queryStr_select = "SELECT * FROM article";
 		$queryStr_order_dy = " ORDER BY a_id";
 		$queryStr_limit = " LIMIT ".$start_row.",".$per_page;
+		$queryStr_where = "";
 		if ($search_key == "tag") {
 			$queryStr_where = " WHERE a_tag LIKE '%$search_txt%'";
 		} elseif ($search_key == "category") {
@@ -39,7 +40,7 @@ class Front_end_model extends CI_Model
 		}
 
 		$queryStr = $queryStr_select.$queryStr_where.$queryStr_order_dy.$queryStr_limit;
-
+		
 		$total_row = $this->db->query($queryStr_select.$queryStr_where);
 
 		$result['num_rows'] = $total_row->num_rows();
@@ -117,6 +118,17 @@ class Front_end_model extends CI_Model
 		$queryStr = "SELECT * FROM category";
 
 		$rec = $this->db->query($queryStr);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
+	public function category_search($c_id)
+	{
+		$query = "SELECT c_title FROM category WHERE c_id = '$c_id'";
+
+		$rec = $this->db->query($query);
 
 		$result = $rec->result_array($rec);
 

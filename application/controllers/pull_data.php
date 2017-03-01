@@ -34,10 +34,10 @@ class Pull_data extends CI_Controller {
 			$this->db->query("INSERT INTO category (c_title) VALUES ('".$article['c_title']."')");
 		}
 
-		$this->db->query("CREATE TABLE cate_tmp AS SELECT DISTINCT c_title FROM category");
-		$this->db->query("TRUNCATE TABLE category");
-		$this->db->query("INSERT INTO category (c_title) SELECT c_title FROM cate_tmp");
-		$this->db->query("DROP TABLE cate_tmp");
+		$this->db->query("CREATE TABLE cate_tmp AS SELECT DISTINCT c_title FROM category");//製作過濾重複資料的副本
+		$this->db->query("TRUNCATE TABLE category");//刪除本來資料表的資料
+		$this->db->query("INSERT INTO category (c_title) SELECT c_title FROM cate_tmp");//將副本資料導入
+		$this->db->query("DROP TABLE cate_tmp");//刪除副本
 		
 		//重置article_category雙關聯資料表
 

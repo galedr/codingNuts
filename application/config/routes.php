@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Main_page/index';
 $route['index'] = 'Main_page/index';
 //首頁
-$route['header_search'] = 'Main_page/index_search';
+$route['header_search/(:any)/(:any)/(:num)'] = 'Main_page/index_search/$1/$2/$3';
 
 //文章內頁
 $route['articles/(:num)'] = 'Main_page/articles/$1';

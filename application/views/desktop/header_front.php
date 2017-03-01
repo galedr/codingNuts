@@ -175,21 +175,22 @@
 					<p>&#8853 <a href="#">Article List</a></p>
 				</div>
 			</div>
-
-			<div class="searchBar_container
-						col-lg-12">
-				<div class="col-lg-4 col-lg-offset-4">
-					<div class="input-group searchBar">
-						
-						<input type="text" class="form-control" placeholder="請輸入關鍵字" name="search_txt">
-						<input type="hidden" name="search_key" value="tag">
-						<span class="input-group-btn" id="index_search">
-					    	<button class="btn btn-info" type="button">搜尋</button>
-						</span>
-						
-					</div>
-				</div>			
-			</div>
+			<form action="<?php echo base_url(); ?>header_search/tag/none/1" method="post">
+				<div class="searchBar_container
+							col-lg-12">
+					<div class="col-lg-4 col-lg-offset-4">
+						<div class="input-group searchBar">
+							
+							<input type="text" class="form-control" placeholder="請輸入關鍵字" name="search_txt">
+							<input type="hidden" name="search_key" value="tag">
+							<span class="input-group-btn" id="index_search">
+						    	<button class="btn btn-info" type="submit">搜尋</button>
+							</span>
+							
+						</div>
+					</div>			
+				</div>
+			</form>
 			<div class="classList_container
 						col-lg-12">
 				<ul class="classList">
@@ -198,7 +199,7 @@
 
 						if(!isset($search_txt)){ ?>
 
-							<li><?php echo $cate['c_title']; ?></li>
+							<li value="<?php echo $cate['c_id']; ?>"><?php echo $cate['c_title']; ?></li>
 
 					<?php } else {
 
@@ -207,13 +208,13 @@
 								<li style="
 									background-color: #FF8800;
 									border: 1px solid #FF8800;
-									color: white;">
+									color: white;" value="<?php echo $cate['c_id']; ?>">
 									<?php echo $cate['c_title']; ?>	
 								</li>
 								
 						<?php } else { ?>
 
-								<li><?php echo $cate['c_title']; ?></li>
+								<li value="<?php echo $cate['c_id']; ?>"><?php echo $cate['c_title']; ?></li>
 
 						<?php } ?>
 					<?php } ?>
@@ -223,6 +224,7 @@
 			
 		</div>
 		<!-- ENd of header -->
+		
 
 		<script>var base_url = "<?php echo base_url(); ?>";</script>
 		<script src="<?php echo base_url(); ?>assets/js/index.js"></script>

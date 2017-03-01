@@ -57,35 +57,69 @@
 						</div>
 				<?php } ?>
 				<!-- 分頁 -->
-				
-				<div class="pagination_container
-							col-lg-12">
-					<ul class="pagination pagination-sm">
-						
-						<?php if ($num_page > 1){ ?>
-					 		<li><a href="<?php echo base_url(); ?>header_search?search_key=<?php echo $search_key; ?>&search_txt=<?php echo $search_txt; ?>&page=1">&laquo;</a></li>
-					 	<?php } ?>
-					 	<?php
-					 		for ($i = (($num_page - $range) - 1); $i < (($num_page + $range) + 1) ; $i++) { 
-					 			if (($i > 0) and ($i <= $total_page)) {
-					 				if ($i == $num_page) { ?>
-					 					<li class="active"><a href="javascript:;"><?php echo $num_page; ?></a></li>
-					 				<?php } else { ?>
-										<li><a href="<?php echo base_url(); ?>header_search?search_key=<?php echo $search_key; ?>&search_txt=<?php echo $search_txt; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-					 				<?php }
-					 			}
-					 		}
-					 	 ?>
-					  	
-						<?php if ($num_page < $total_page) { ?>
-					  		<li><a href="<?php echo base_url(); ?>header_search?search_key=<?php echo $search_key; ?>&search_txt=<?php echo $search_txt; ?>&page=<?php echo $total_page; ?>">&raquo;</a></li>
-					  	<?php } ?>
-					</ul>
-				</div>
-			</div>
+				<?php if (isset($search_key) and ($search_key == 'tag')) { ?>
+					<!-- tag search -->
+					<div class="pagination_container
+								col-lg-12">
+						<ul class="pagination pagination-sm">
+							
+							<?php if ($num_page > 1){ ?>
+						 		<li><a href="javascript:;" onclick="tag_search(1);">&laquo;</a></li>
+						 	<?php } ?>
+						 	<?php
+						 		for ($i = (($num_page - $range) - 1); $i < (($num_page + $range) + 1) ; $i++) { 
+						 			if (($i > 0) and ($i <= $total_page)) {
+						 				if ($i == $num_page) { ?>
+						 					<li class="active"><a href="javascript:;"><?php echo $num_page; ?></a></li>
+						 				<?php } else { ?>
+											<li><a href="javascript:;" onclick="tag_search(<?php echo $i; ?>);"><?php echo $i; ?></a></li>
+						 				<?php }
+						 			}
+						 		}
+						 	 ?>
+						  	
+							<?php if ($num_page < $total_page) { ?>
+						  		<li><a href="javascript:;" onclick="tag_search(<?php echo $total_page; ?>);">&raquo;</a></li>
+						  	<?php } ?>
 
-		</div>
-		
+						  	<form action="#" method="post" id="tag_form">
+						  		<input type="hidden" name="search_txt" value="<?php echo $post_txt; ?>">
+						  	</form>
+						  	
+						</ul>
+					</div>
+
+				<?php } else { ?>
+					<!-- category search -->
+					<div class="pagination_container
+								col-lg-12">
+						<ul class="pagination pagination-sm">
+							
+							<?php if ($num_page > 1){ ?>
+						 		<li><a href="<?php echo base_url(); ?>header_search/<?php echo $search_key; ?>/<?php echo $search_txt; ?>/1">&laquo;</a></li>
+						 	<?php } ?>
+						 	<?php
+						 		for ($i = (($num_page - $range) - 1); $i < (($num_page + $range) + 1) ; $i++) { 
+						 			if (($i > 0) and ($i <= $total_page)) {
+						 				if ($i == $num_page) { ?>
+						 					<li class="active"><a href="javascript:;"><?php echo $num_page; ?></a></li>
+						 				<?php } else { ?>
+											<li><a href="<?php echo base_url(); ?>header_search/<?php echo $search_key; ?>/<?php echo $search_txt; ?>/<?php echo $i; ?>"><?php echo $i; ?></a></li>
+						 				<?php }
+						 			}
+						 		}
+						 	 ?>
+						  	
+							<?php if ($num_page < $total_page) { ?>
+						  		<li><a href="<?php echo base_url(); ?>header_search/<?php echo $search_key; ?>/<?php echo $search_txt; ?>/<?php echo $total_page; ?>">&raquo;</a></li>
+						  	<?php } ?>
+						  	
+						</ul>
+					</div>
+				<!-- End of pagination -->
+				<?php } ?>
+			</div>
+		</div> 
 
 		<script>var base_url = "<?php echo base_url(); ?>";</script>
 		<script src="<?php echo base_url(); ?>assets/js/index.js"></script>
