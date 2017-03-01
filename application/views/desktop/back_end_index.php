@@ -58,19 +58,19 @@
 								<li><a href="<?php echo base_url(); ?>back_end">所有分類</a></li>
 								<?php
 									foreach ($article_category as $key => $value) {
-										foreach ($value as $key => $value) {
 								?>
 											<li>
-												<a href="<?php echo base_url(); ?>back_end_search?search_key=category&search_txt=<?php echo $value; ?>"><?php echo $value; ?></a>
+												<a href="<?php echo base_url(); ?>back_end_search/category/<?php echo $value['c_id']; ?>/1"><?php echo $value['c_title']; ?></a>
 											</li>
-								<?php } } ?>
+								<?php } ?>
 								<!-- <li><a href="#">test2</a></li>
 								<li><a href="#">test3</a></li> -->
 							</ul>
 						</div>
 					</div>
+
 					<div class="search_article">
-						<form method="get" action="<?php echo base_url(); ?>back_end_search">
+						<form method="post" action="<?php echo base_url(); ?>back_end_search/tag/none/1">
 							<div class="input-group">
 								<input type="text" class="form-control backEnd_search" placeholder="請輸入關鍵字" name="search_txt">
 								<input type="hidden" name="search_key" value="tag">
@@ -82,6 +82,7 @@
 							</div>
 						</form>
 					</div>
+					
 				</div>
 			</div>
 			
@@ -89,7 +90,28 @@
 				<div class="pageStatus">
 					<p>第 <?php echo $now_page; ?> 頁，共 <?php echo $total_rows; ?> 頁</p>
 					<ul class="pagination pagination-sm">
-						<?php echo $pagi_link; ?>
+						<?php if ($num_page > 1) { ?>
+							<li><a href="<?php echo base_url(); ?>back_end/1">&laquo;</a></li>
+						<?php } ?>
+						<?php 
+							for ($i = (($num_page - $range) - 1); $i < (($num_page + $range) + 1); $i++) {
+
+								if (($i > 0) and ($i <= $total_rows)) {
+									
+									if ($i == $num_page) { ?>
+										
+										<li class="active"><a href="javascript:;"><?php echo $i; ?></a></li>
+
+									<?php } else { ?>
+										<li><a href="<?php echo base_url(); ?>back_end/<?php echo $i; ?>"><?php echo $i; ?></a></li>
+
+									<?php }
+								}
+							}
+						?>
+						<?php if ($num_page < $total_rows) { ?>
+							<li><a href="<?php echo base_url(); ?>back_end/<?php echo $total_rows; ?>">&raquo;</a></li>
+						<?php } ?>
 					</ul>
 				</div>
 			</div>

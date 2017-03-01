@@ -188,6 +188,17 @@ class Back_end_model extends CI_Model
 		return $result;
 	}
 
+	public function cate_check_id($c_id)
+	{
+		$query = "SELECT * FROM category WHERE c_id = '$c_id'";
+
+		$rec = $this->db->query($query);
+
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
 }
 
 ?>

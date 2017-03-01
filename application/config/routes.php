@@ -66,8 +66,8 @@ $route['member_logout'] = 'Main_page/member_logout';
 //後台
 $route['admin_login'] = 'Back_end/admin_login';
 $route['login_process'] = 'Back_end/admin_login_process';
-$route['back_end'] = 'Back_end/back_end_index';
-$route['back_end_search'] = 'Back_end/back_end_search';
+$route['back_end/(:any)'] = 'Back_end/back_end_index/$1';
+$route['back_end_search/(:any)/(:any)/(:num)'] = 'Back_end/back_end_search/$1/$2/$3';
 $route['logout'] = 'Back_end/logout';
 //新文章
 $route['new_article'] = 'Back_end/new_article';

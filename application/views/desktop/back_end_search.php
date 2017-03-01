@@ -56,63 +56,109 @@
 						<div class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">所有分類<b class="caret"></b></a>
 							<ul class="dropdown-menu" id="article_class">
-								<li><a href="<?php echo base_url(); ?>back_end">所有分類</a></li>
+								<li><a href="<?php echo base_url(); ?>back_end/1">所有分類</a></li>
 								<?php
 									foreach ($article_category as $key => $value) {
-										foreach ($value as $key => $value) {
 								?>
 											<li>
-												<a href="<?php echo base_url(); ?>back_end_search?search_key=category&search_txt=<?php echo $value; ?>"><?php echo $value; ?></a>
+												<a href="<?php echo base_url(); ?>back_end_search/category/<?php echo $value['c_id']; ?>/1"><?php echo $value['c_title']; ?></a>
 											</li>
-								<?php } } ?>
+								<?php } ?>
 								<!-- <li><a href="#">test2</a></li>
 								<li><a href="#">test3</a></li> -->
 							</ul>
 						</div>
 					</div>
+
+				
 					<div class="search_article">
-						<div class="input-group">
-							<input type="text" class="form-control backEnd_search" placeholder="請輸入關鍵字">
-					    	<span class="input-group-btn">
-						    	<button class="btn btn-info" type="button">
-						    		搜尋
-						    	</button>
-						    </span>
-						</div>
+						<form action="<?php echo base_url(); ?>back_end_search/tag/none/1" method="post">
+							<div class="input-group">
+								<input type="text" class="form-control backEnd_search" placeholder="請輸入關鍵字" name="search_txt">
+						    	<span class="input-group-btn">
+							    	<button class="btn btn-info" type="submit">
+							    		搜尋
+							    	</button>
+							    </span>
+							</div>
+						</form>
 					</div>
+					
+
 				</div>
 			</div>
 			
-			<div class="article_pagination">
-				<div class="pageStatus">
-					<p>第 <?php echo $num_page; ?> 頁，共 <?php echo $total_page; ?> 頁</p>
-					<ul class="pagination pagination-sm">
-						<?php if ($num_page > 1) { ?>
-							<li><a href="<?php echo base_url(); ?>back_end_search?searchKey=<?php echo $search_key; ?>&search_txt=<?php echo $search_txt; ?>&num_page=1">&laquo;</a></li>
-						<?php } ?>
-						<?php 
-							for ($i = (($num_page - $range) - 1); $i < (($num_page + $range) + 1); $i++) {
+			<?php if (isset($search_key) and ($search_key == 'tag')) { ?>
 
-								if (($i > 0) and ($i <= $total_page)) {
-									
-									if ($i == $num_page) { ?>
+				<div class="article_pagination">
+					<div class="pageStatus">
+						<p>第 <?php echo $num_page; ?> 頁，共 <?php echo $total_page; ?> 頁</p>
+						<ul class="pagination pagination-sm">
+							<?php if ($num_page > 1) { ?>
+								<li><a href="javascript:;" onclick="tag_search(1);">&laquo;</a></li>
+							<?php } ?>
+							<?php 
+								for ($i = (($num_page - $range) - 1); $i < (($num_page + $range) + 1); $i++) {
+
+									if (($i > 0) and ($i <= $total_page)) {
 										
-										<li class="active"><a href="javascript:;"><?php echo $i; ?></a></li>
+										if ($i == $num_page) { ?>
+											
+											<li class="active"><a href="javascript:;"><?php echo $i; ?></a></li>
 
-									<?php } else { ?>
-										<li><a href="<?php echo base_url(); ?>back_end_search?search_key=<?php echo $search_key; ?>&search_txt=<?php echo $search_txt; ?>&num_page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+										<?php } else { ?>
+											<li><a href="javascript:;" onclick="tag_search(<?php echo $i; ?>)"><?php echo $i; ?></a></li>
 
-									<?php }
+										<?php }
+									}
 								}
-							}
-						?>
-						<?php if ($num_page < $total_page) { ?>
-							<li><a href="<?php echo base_url(); ?>back_end_search?search_key=<?php echo $search_key; ?>&search_txt=<?php echo $search_txt; ?>&num_page=<?php echo $total_page; ?>">&raquo;</a></li>
-						<?php } ?>
-						
-					</ul>
+							?>
+							<?php if ($num_page < $total_page) { ?>
+								<li><a href="javascript:;" onclick="tag_search(<?php echo $total_page; ?>)">&raquo;</a></li>
+							<?php } ?>
+							
+						</ul>
+					</div>
 				</div>
-			</div>
+
+				<form action="" method="post" id="tag_form">
+					<input type="hidden" name="search_txt" value="<?php echo $search_txt; ?>">
+				</form>
+				
+			<? } else { ?>
+
+				<div class="article_pagination">
+					<div class="pageStatus">
+						<p>第 <?php echo $num_page; ?> 頁，共 <?php echo $total_page; ?> 頁</p>
+						<ul class="pagination pagination-sm">
+							<?php if ($num_page > 1) { ?>
+								<li><a href="<?php echo base_url(); ?>back_end_search/<?php echo $search_key; ?>/<?php echo $search_txt; ?>/1">&laquo;</a></li>
+							<?php } ?>
+							<?php 
+								for ($i = (($num_page - $range) - 1); $i < (($num_page + $range) + 1); $i++) {
+
+									if (($i > 0) and ($i <= $total_page)) {
+										
+										if ($i == $num_page) { ?>
+											
+											<li class="active"><a href="javascript:;"><?php echo $i; ?></a></li>
+
+										<?php } else { ?>
+											<li><a href="<?php echo base_url(); ?>back_end_search/<?php echo $search_key; ?>/<?php echo $search_txt; ?>/<?php echo $i; ?>"><?php echo $i; ?></a></li>
+
+										<?php }
+									}
+								}
+							?>
+							<?php if ($num_page < $total_page) { ?>
+								<li><a href="<?php echo base_url(); ?>back_end_search/<?php echo $search_key; ?>/<?php echo $search_txt; ?>/<?php echo $total_page; ?>">&raquo;</a></li>
+							<?php } ?>
+							
+						</ul>
+					</div>
+				</div>
+
+			<?php } ?>
 
 			<!-- End of content_header -->
 

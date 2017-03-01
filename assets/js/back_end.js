@@ -14,18 +14,10 @@ $(document).ready(function(){
 
 })
 
-function send_cate(article_cate)
-{
-	
-	var search_key = "category";
+function tag_search(num_page){
 
-	$.ajax({
-		url: base_url+'back_end_search',
-		data: {search_txt: article_cate,
-				search_key: search_key},
-		type: "GET",
-		dataType: "JSON",
-	})
-	
+	$('#tag_form').attr('action',base_url+"back_end_search/tag/none/"+num_page).submit();
+
 }
+
 

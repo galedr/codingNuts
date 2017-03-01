@@ -30,7 +30,7 @@ class Back_end extends CI_Controller {
 
 	}
 
-	public function back_end_index()
+	public function back_end_index($num_page)
 	{	
 
 		//驗證是否已經登入，如果有，將登入人資訊取出
@@ -55,49 +55,26 @@ class Back_end extends CI_Controller {
 
 		//取得分頁資料與文章
 
-		$config['base_url'] = site_url(strtolower(__CLASS__).'/'.__FUNCTION__);
-		$config['per_page'] = 10;
-		$config['use_page_numbers'] = true;
-		//套上bootstrap的分頁設定
-		$config['full_tag_open'] = '<li>' ;
-		$config['full_tag_close'] = '</li>' ;
-		$config['first_tag_open'] = '<li>' ;
-		$config['first_tag_close'] = '</li>' ;
-		$config['last_tag_open'] = '<li>' ;
-		$config['last_tag_close'] = '</li>' ;
-		$config['num_tag_open'] = '<li>' ;
-		$config['num_tag_close'] = '</li>' ;
-		$config['next_tag_open'] = '<li>' ;
-		$config['next_tag_close'] = '</li>' ;
-		$config['prev_tag_open'] = '<li>' ;
-		$config['prev_tag_close'] = '</li>' ;
-		// 目前頁面加上 class="active"，產生填滿的背景效果。
-		$config['cur_tag_open'] = '<li class="active"><a><b>' ;
-		$config['cur_tag_close'] = '</b></a></li>' ;
+		$per_page = 10;
 
-		//將起始筆數及每頁筆數傳給model，並接回結果
-		//$page = url末端的頁數，如果沒有則為1
-		$page = $this->uri->segment(3);
+		$range = 2;
+		$data['range'] = $range;
 
-		$page = ($page == '')?1:$page; 
-		$offset = $page == false?1:($config['per_page'] * ($page - 1));
-		$data['now_page'] = $page;//頁面計數用
+		$data['num_page'] = $num_page;
+
+		$start_row = ($num_page - 1)*$per_page;
+		
+		$data['now_page'] = $num_page;//頁面計數用
 
 		//將所有分頁及查詢參數回傳Model
-		$pagiData = $this->back_end_model->article_row($offset, $config['per_page']);
+		$pagiData = $this->back_end_model->article_row($start_row, $per_page);
 
 		$data['article_row'] = $pagiData;
 
 		//接收model回傳的row數值
-		$config['total_rows'] = $pagiData['num_rows'];
-		$data['total_rows'] = ceil($config['total_rows']/$config['per_page']);//頁面計數用
+		$data['total_rows'] = ceil($pagiData['num_rows']/$per_page);//頁面計數用
 
 		
-		$this->load->library('pagination');
-
-		$pagi_link = $this->pagination->initialize($config)->create_links();
-		
-		$data['pagi_link'] = $pagi_link;
 
 		//頁面所需，文章筆數
 
@@ -105,7 +82,7 @@ class Back_end extends CI_Controller {
 
 		$posted_num = count($posted_article);
 
-		$data['article_num'] = array('total_num'=>$config['total_rows'],
+		$data['article_num'] = array('total_num'=>$pagiData['num_rows'],
 									'posted_num'=>$posted_num);
 
 		//取出分類
@@ -120,7 +97,7 @@ class Back_end extends CI_Controller {
 
 	//後台分類搜尋
 
-	public function back_end_search()
+	public function back_end_search($search_key, $search_txt, $num_page)
 	{	
 
 		//驗證是否已經登入，如果有，將登入人資訊取出
@@ -149,23 +126,25 @@ class Back_end extends CI_Controller {
 
 		$per_page = 10;//每頁顯示筆數
 
-		$num_page = 1;//預設目前頁數
-
 		$range = 2;//當前頁數前後顯示頁碼
 		$data['range'] = $range;
 
-		if (isset($_GET['search_key'])) {
-			$search_key = $_GET['search_key'];
-		}
-		if (isset($_GET['search_txt'])) {
-			$search_txt = $_GET['search_txt'];
-		}
-		if (isset($_GET['num_page'])) {
-			$num_page = $_GET['num_page'];
-		}
-		$data['num_page'] = $num_page;
 		$data['search_key'] = $search_key;
 		$data['search_txt'] = $search_txt;
+
+		if ($search_key == 'category') {
+			$cate = $this->back_end_model->cate_check_id($search_txt);
+			$search_txt = $cate[0]['c_title'];
+		}
+		
+		if ($search_key == 'tag') {
+			if (isset($_POST['search_txt'])) {
+				$search_txt = $_POST['search_txt'];
+				$data['search_txt'] = $search_txt;
+			}
+		}
+
+		$data['num_page'] = $num_page;
 
 		$data['num_page'] = $num_page;
 
@@ -236,7 +215,7 @@ class Back_end extends CI_Controller {
 		
 		$this->setsession->admin_set('codingNuts_admin', $_POST['adminAccount']);
 		
-		header("location: ".base_url()."back_end");
+		header("location: ".base_url()."back_end/1");
 
 	}
 
