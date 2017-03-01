@@ -40,15 +40,11 @@ class Main_page extends CI_Controller {
 		$range = 2;
 		$data['range'] = $range;
 
-		if (isset($_GET['page'])) {
-			$num_page = $_GET['page'];
-		}
 		$data['num_page'] = $num_page;
 
 		$start_row = ($num_page - 1)*$per_page;
 
 		//引入 json 檔
-
 
 		$json_data = file_get_contents("json_files/all_article.json");
 
@@ -59,7 +55,49 @@ class Main_page extends CI_Controller {
 		$data['total_page'] = ceil((count($all_article))/$per_page);
 
 		$data['num_rows'] = count($all_article);
-		$data['article_data'] = $all_article;
+		
+		$data['total_page'] = ceil(count($all_article)/$per_page);
+
+		//分類 row out
+
+		$data['category'] = $this->front_end_model->category_row();
+
+		//最新文章
+
+		$data['newest_article'] = $this->front_end_model->newest_article();
+
+		$this->load->view('desktop/header_front', $data);
+		$this->load->view('desktop/index');
+		$this->load->view('desktop/footer_front');
+	}
+
+	public function index_pagination($num_page)
+	{
+		$this->load->Model('front_end_model');
+
+		//文章row out
+
+		$per_page = 9;
+
+		$range = 2;
+		$data['range'] = $range;
+
+		$data['num_page'] = $num_page;
+
+		$start_row = ($num_page - 1)*$per_page;
+
+		//引入 json 檔
+
+		$json_data = file_get_contents("json_files/all_article.json");
+
+		$all_article = json_decode($json_data, true);
+
+		$data['article_data'] = array_slice($all_article, $start_row, $per_page);
+
+		$data['total_page'] = ceil((count($all_article))/$per_page);
+
+		$data['num_rows'] = count($all_article);
+		
 		$data['total_page'] = ceil(count($all_article)/$per_page);
 
 		//分類 row out
@@ -96,7 +134,7 @@ class Main_page extends CI_Controller {
 			}
 		}
 
-		$per_page = 1;
+		$per_page = 9;
 
 		$range = 2;
 		$data['range'] = $range;
