@@ -14,6 +14,9 @@
 		<script src="<?php echo base_url(); ?>assets/js/new_article.js"></script>
 	</head>
 	<body>
+		
+		<?php $this->load->view('desktop/back_end_header'); ?>
+
 		<form enctype="multipart/form-data" method="post" action="<?php echo base_url(); ?>back_end/add_article" id="article_form">
 			<div class="insert_title
 						col-lg-12">
@@ -32,7 +35,7 @@
 						<img src="<?php echo $admin[0]['a_img']; ?>">
 						<p>以 <?php echo $admin[0]['a_nickname']; ?> 的身份張貼</p>
 					</div>
-					<button class="btn btn-default" id="submitPost">發佈</button>
+					<button class="btn btn-default" id="submitPost" type="button" onclick="submit_check(this.form)">發佈</button>
 				</div>
 
 			</div>
@@ -63,8 +66,10 @@
 								<p>或從已有的分類中選取 ：</p>
 
 								<!-- labrl for，label夾的文字，input的name，value 四者必須一樣 -->
-								<?php foreach ($used_category as $key => $uc) { ?>
-									<label for="cate_<?php echo $uc['c_id']; ?>"><?php echo $uc['c_title']; ?></label>
+								<?php foreach ($categories as $key => $uc) { ?>
+									<label for="cate_<?php echo $uc['c_id']; ?>" style="cursor: pointer;">
+										<?php echo $uc['c_title']; ?>
+									</label>
 									<input type="radio" name="usedClass" value="<?php echo $uc['c_title']; ?>" id="cate_<?php echo $uc['c_id']; ?>">
 								<?php } ?>
 								

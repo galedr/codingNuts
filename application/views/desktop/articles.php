@@ -13,7 +13,8 @@
 		<script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
 	</head>
 	<body>
-				
+		
+		<?php $this->load->view('desktop/header_front'); ?>
 		
 		<div class="article_holder container
 					col-lg-8 col-lg-offset-2">

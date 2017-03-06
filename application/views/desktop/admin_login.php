@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>新增文章</title>
+		<title>管理者登入</title>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
 		<script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/adminLogin.css">
@@ -16,7 +16,7 @@
 			
 				<div class="loginInput">
 
-					<form action="<?php echo base_url(); ?>login_process" method="post">
+					<form action="<?php echo base_url(); ?>admin_login" method="post">
 						<div class="input-group">
 							<input type="text" class="form-control" placeholder="account" name="adminAccount">
 						</div>

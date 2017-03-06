@@ -47,7 +47,7 @@
 					col-lg-10">
 			<div class="content_header">
 				<div class="newArticle">
-					<button class="btn btn-default" onclick="location.href='<?php echo base_url(); ?>new_article';">
+					<button class="btn btn-default" onclick="location.href='<?php echo base_url(); ?>back_end/new_article';">
 						新文章
 					</button>
 				</div>

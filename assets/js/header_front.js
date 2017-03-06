@@ -2,11 +2,11 @@ function getStart(){
 
 	$('.classList li').click(function(){
 
-		var search_txt = $(this).attr('value');
+		var s_val = $(this).attr('value');
 
-		var search_key = "category";
+		var s_key = "category";
 
-		location.href = base_url+"header_search/"+search_key+"/"+search_txt+"/1";
+		location.href = base_url+"category/1?s_key="+s_key+"&s_val="+s_val;
 
 	})
 

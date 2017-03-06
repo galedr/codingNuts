@@ -14,7 +14,10 @@
 		<script src="<?php echo base_url(); ?>assets/js/article_edit.js"></script>
 	</head>
 	<body>
-		<form enctype="multipart/form-data" method="post" action="<?php echo base_url(); ?>article_update/<?php echo $article_data[0]['a_id']; ?>" id="article_form">
+
+		<?php $this->load->view('desktop/back_end_header'); ?>
+
+		<form enctype="multipart/form-data" method="post" action="<?php echo base_url(); ?>article_update/<?php echo $article[0]['a_id']; ?>" id="article_form">
 			<div class="insert_title
 						col-lg-12">
 
@@ -22,8 +25,8 @@
 							col-lg-8">
 					<div class="input-group">
 						<span class="input-group-addon" >文章</span>
-						<input type="text" class="form-control" name="postTitle" value="<?php echo $article_data[0]['a_title']; ?>">
-						<input type="hidden" name="a_id" value="<?php echo $article_data[0]['a_id']; ?>">
+						<input type="text" class="form-control" name="postTitle" value="<?php echo $article[0]['a_title']; ?>">
+						<input type="hidden" name="a_id" value="<?php echo $article[0]['a_id']; ?>">
 					</div>
 				</div>
 
@@ -33,7 +36,7 @@
 						<img src="<?php echo $admin[0]['a_img']; ?>">
 						<p>以 <?php echo $admin[0]['a_nickname']; ?> 的身份張貼</p>
 					</div>
-					<button class="btn btn-default" id="submitPost" type="submit">發佈</button>
+					<button class="btn btn-default" id="submitPost" type="button" onclick="submit_check(this.form)">發佈</button>
 				</div>
 
 			</div>
@@ -44,18 +47,18 @@
 						col-lg-12">
 				<div class="edit_area
 							col-lg-9">
-					<textarea name="postContent" id="postContent" cols="30" rows="10"><?php echo $article_data[0]['a_content']; ?></textarea>
+					<textarea name="postContent" id="postContent" cols="30" rows="10"><?php echo $article[0]['a_content']; ?></textarea>
 				</div>
 				<div class="set_other
 							col-lg-3">
 							
 					<ul class="list-group">
 						<li class="list-group-item postClass">
-							文章分類 : <span><?php echo $article_data[0]['c_title']; ?></span>
+							文章分類 : <span><?php echo $article[0]['c_title']; ?></span>
 						</li>
 						<li class="list-group-item postClass_set">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="新增分類" name="insertClass" value="<?php echo $article_data[0]['c_title']; ?>">
+								<input type="text" class="form-control" placeholder="新增分類" name="insertClass" value="<?php echo $article[0]['c_title']; ?>">
 								<span class="input-group-btn">
 								<button class="btn btn-info" type="button" id="insertClass_submit">確認</button>
 								</span>
@@ -65,7 +68,7 @@
 
 								<!-- labrl for，label夾的文字，input的name，value 四者必須一樣 -->
 								
-								<?php foreach ($used_category as $key => $uc) { ?>
+								<?php foreach ($categories as $key => $uc) { ?>
 									<label for="cate_<?php echo $uc['c_id']; ?>"><?php echo $uc['c_title']; ?></label>
 									<input type="radio" name="usedClass" value="<?php echo $uc['c_title']; ?>" id="cate_<?php echo $uc['c_id']; ?>">
 								<?php } ?>
@@ -75,11 +78,11 @@
 						</li>
 
 						<li class="list-group-item postTag">
-							關鍵字 ： <span id="postTag"><?php echo $article_data[0]['a_tag']; ?></span>
+							關鍵字 ： <span id="postTag"><?php echo $article[0]['a_tag']; ?></span>
 						</li>
 						<li class="list-group-item postTag_set">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="關鍵字請間請用半形逗號,做區隔" name="insertTag" id="insertTag" value="<?php echo $article_data[0]['a_tag']; ?>">
+								<input type="text" class="form-control" placeholder="關鍵字請間請用半形逗號,做區隔" name="insertTag" id="insertTag" value="<?php echo $article[0]['a_tag']; ?>">
 								<span class="input-group-btn">
 								<button class="btn btn-info" type="button" id="insertTag_submit">確認</button>
 								</span>
@@ -102,15 +105,15 @@
 							<input type="file" name="a_img">
 						</li>
 						<li class="list-group-item img_preview">
-							<img src="<?php echo $article_data[0]['a_img']; ?>" id="img_preview">
-							<input type="hidden" name="a_img_source" value="<?php echo $article_data[0]['a_img']; ?>">
+							<img src="<?php echo $article[0]['a_img']; ?>" id="img_preview">
+							<input type="hidden" name="a_img_source" value="<?php echo $article[0]['a_img']; ?>">
 						</li>
 
 						<li class="list-group-item">
 							文章簡介 ：
 						</li>
 						<li class="list-group-item">
-							<textarea name="a_intro" cols="30" rows="5" class="form-control"><?php echo $article_data[0]['a_intro']; ?></textarea>
+							<textarea name="a_intro" cols="30" rows="5" class="form-control"><?php echo $article[0]['a_intro']; ?></textarea>
 						</li>
 
 					</ul>

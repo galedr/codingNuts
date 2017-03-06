@@ -12,7 +12,9 @@
 		<script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
 	</head>
 	<body>
-				
+		
+		<?php $this->load->view('desktop/back_end_header'); ?>
+
 		<div class="optionList_container
 					col-lg-2">
 			<ul class="list-group optionList">
@@ -23,15 +25,15 @@
 
 				<li class="list-group-item bindArticle">	全部 
 					<?php 
-						if ($article_num['total_num'] > 0) {
-							echo "( ".$article_num['total_num']." )";
+						if ($num_all_article > 0) {
+							echo "( ".$num_all_article." )";
 						}
 					?>
 				</li>
 				<li class="list-group-item bindArticle">	已發佈
 					<?php 
-						if ($article_num['posted_num'] > 0) {
-							echo "( ".$article_num['posted_num']." )";
+						if ($num_posted_article > 0) {
+							echo "( ".$num_posted_article." )";
 						}
 					?>
 				</li>
@@ -47,7 +49,7 @@
 					col-lg-10">
 			<div class="content_header">
 				<div class="newArticle">
-					<button class="btn btn-default" onclick="location.href='<?php echo base_url(); ?>new_article';">
+					<button class="btn btn-default" onclick="location.href='<?php echo base_url(); ?>back_end/new_article';">
 						新文章
 					</button>
 				</div>
@@ -58,10 +60,10 @@
 							<ul class="dropdown-menu" id="article_class">
 								<li><a href="<?php echo base_url(); ?>back_end">所有分類</a></li>
 								<?php
-									foreach ($article_category as $key => $value) {
+									foreach ($categories as $key => $cate) {
 								?>
 											<li>
-												<a href="<?php echo base_url(); ?>back_end_search/category/<?php echo $value['c_id']; ?>/1"><?php echo $value['c_title']; ?></a>
+												<a href="<?php echo base_url(); ?>back_end/category/1?s_key=category&s_val=<?php echo $cate['c_title']; ?>"><?php echo $cate['c_title']; ?></a>
 											</li>
 								<?php } ?>
 								<!-- <li><a href="#">test2</a></li>
@@ -71,10 +73,10 @@
 					</div>
 
 					<div class="search_article">
-						<form method="post" action="<?php echo base_url(); ?>back_end_search/tag/none/1">
+						<form method="get" action="<?php echo base_url(); ?>back_end/tag/1">
 							<div class="input-group">
-								<input type="text" class="form-control backEnd_search" placeholder="請輸入關鍵字" name="search_txt">
-								<input type="hidden" name="search_key" value="tag">
+								<input type="text" class="form-control backEnd_search" placeholder="請輸入關鍵字" name="s_val">
+								<input type="hidden" name="s_key" value="tag">
 						    	<span class="input-group-btn">
 							    	<button class="btn btn-info" type="submit">
 							    		搜尋
@@ -89,31 +91,8 @@
 			
 			<div class="article_pagination">
 				<div class="pageStatus">
-					<p>第 <?php echo $now_page; ?> 頁，共 <?php echo $total_rows; ?> 頁</p>
-					<ul class="pagination pagination-sm">
-						<?php if ($num_page > 1) { ?>
-							<li><a href="<?php echo base_url(); ?>back_end/1">&laquo;</a></li>
-						<?php } ?>
-						<?php 
-							for ($i = (($num_page - $range) - 1); $i < (($num_page + $range) + 1); $i++) {
-
-								if (($i > 0) and ($i <= $total_rows)) {
-									
-									if ($i == $num_page) { ?>
-										
-										<li class="active"><a href="javascript:;"><?php echo $i; ?></a></li>
-
-									<?php } else { ?>
-										<li><a href="<?php echo base_url(); ?>back_end/<?php echo $i; ?>"><?php echo $i; ?></a></li>
-
-									<?php }
-								}
-							}
-						?>
-						<?php if ($num_page < $total_rows) { ?>
-							<li><a href="<?php echo base_url(); ?>back_end/<?php echo $total_rows; ?>">&raquo;</a></li>
-						<?php } ?>
-					</ul>
+					<p>第 <?php echo $num_page; ?> 頁，共 <?php echo $total_pages; ?> 頁</p>
+					<?php $this->load->view('desktop/pagination'); ?>
 				</div>
 			</div>
 
@@ -123,26 +102,26 @@
 				<table class="table" id="content_table">
 						
 					<?php
-						foreach ($article_row['article_data'] as $key => $value) {
+						foreach ($articles as $key => $arts) {
 					?>	
 
 						<tr>
 							<td class="article_title">
-								<div>【<?php echo $value['c_title']; ?>】<?php echo $value['a_title']; ?></div>
+								<div>【<?php echo $arts['c_title']; ?>】<?php echo $arts['a_title']; ?></div>
 								<div class="article_option">
-									<a href="<?php echo base_url(); ?>article_edit/<?php echo $value['a_id']; ?>">編輯</a>/<a href="#">檢視</a>/<a href="<?php echo base_url(); ?>delete_article/<?php echo $value['a_id']; ?>">刪除</a>
+									<a href="<?php echo base_url(); ?>edit_article/<?php echo $arts['a_id']; ?>">編輯</a>/<a href="#">檢視</a>/<a href="<?php echo base_url(); ?>article_delete/<?php echo $arts['a_id']; ?>">刪除</a>
 								</div>
 							</td>
 							<td class="draft">
 								<span style="color:'red';">
 									<?php
-										if ($value['a_status'] == '2') {
+										if ($arts['a_status'] == '2') {
 											echo "下架";
 										}
 									?>
 								</span>
 							</td>
-							<td class="poster"><?php echo $value['a_nickname']; ?></td>
+							<td class="poster"><?php echo $arts['a_nickname']; ?></td>
 							<td class="message_num">
 								<img src="<?php echo base_url(); ?>assets/websiteImg/message.png">
 								留言數
@@ -151,7 +130,7 @@
 								<img src="<?php echo base_url(); ?>assets/websiteImg/view.png">
 								瀏覽數
 							</td>
-							<td class="post_time"><?php echo $value['a_datetime']; ?></td>
+							<td class="post_time"><?php echo $arts['a_datetime']; ?></td>
 						</tr>
 					
 					<?php } ?>
@@ -160,7 +139,6 @@
 			</div>
 			
 		</div>
-		
 		
 		<script>var base_url = "<?php echo base_url(); ?>";</script>
 		<script src="<?php echo base_url(); ?>assets/js/back_end.js"></script>		

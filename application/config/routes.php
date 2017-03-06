@@ -49,37 +49,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Main_page/index';
-$route['home/(:any)'] = 'Main_page/index_pagination/$1';
-//首頁
-$route['header_search/(:any)/(:any)/(:num)'] = 'Main_page/index_search/$1/$2/$3';
+$route['default_controller'] = 'Page_index/index';
+$route['index/(:any)'] = 'Page_index/index_pagi/$1'; //首頁分頁
+$route['category/(:any)'] = 'Page_index/index_search/$1';
+$route['tag/(:any)'] = 'Page_index/index_search/$1';
 
-//文章內頁
-$route['articles/(:num)'] = 'Main_page/articles/$1';
-$route['collect_check'] = 'Main_page/collect_check';
-$route['unset_collect'] = 'Main_page/unset_collect';
-//會員
-$route['member_login'] = 'Main_page/member_login';
-$route['member_resign'] = 'Main_page/member_resign';
-$route['member_logout'] = 'Main_page/member_logout';
+// 文章內頁
+$route['articles/(:any)'] = 'Page_article/articles/$1';
 
-//後台
-$route['admin_login'] = 'Back_end/admin_login';
-$route['login_process'] = 'Back_end/admin_login_process';
-$route['back_end/(:any)'] = 'Back_end/back_end_index/$1';
-$route['back_end_search/(:any)/(:any)/(:num)'] = 'Back_end/back_end_search/$1/$2/$3';
-$route['logout'] = 'Back_end/logout';
-//新文章
-$route['new_article'] = 'Back_end/new_article';
-$route['tag_search'] = 'Back_end/tag_search';
-$route['add_article'] = 'Back_end/add_article';
-//修改
-$route['article_edit/(:num)'] = 'Back_end/article_edit/$1';
-$route['article_update/(:num)'] = 'Back_end/article_update/$1';
+// 後台
+$route['back_end'] = 'Page_back_end/back_end_index';
+$route['back_end/(:num)'] = 'Page_back_end/back_end_index_pagi/$1';
+$route['back_end/category/(:any)'] = 'Page_back_end/back_end_search/$1';
+$route['back_end/tag/(:any)'] = 'Page_back_end/back_end_search/$1';
 
-//撈資料 pull_data
-$route['all_article'] = 'Pull_data/all_article';
-$route['reset_category_article'] = 'Pull_data/reset_category_article';
+// 管理者登入
+$route['back_end/admin_login'] = 'Page_back_end/admin_login_page';
+$route['admin_login'] = 'Page_back_end/admin_login';
+$route['admin_logout'] = 'Page_back_end/admin_logout';
+
+// 新增文章
+$route['back_end/new_article'] = 'Page_back_end/new_article';
+$route['new_article/tag_search'] = 'Page_back_end/tag_search';
+$route['back_end/add_article'] = 'Page_back_end/add_article';
+$route['edit_article/(:any)'] = 'Page_back_end/edit_article_page/$1';
+$route['article_update/(:any)'] = 'Page_back_end/edit_article_update/$1';
+$route['article_delete/(:any)'] = 'Page_back_end/article_delete/$1';
+
+// test
+$route['test'] = 'Sch_data/set_article_tag';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

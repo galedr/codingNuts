@@ -7,10 +7,13 @@
 		<title>首頁</title>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/index.css">
+		<script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
+		<!-- header部分 -->
+		<script src="<?php echo base_url(); ?>assets/js/header_front.js"></script>
 		
 	</head>
 	<body>
-		
+		<?php $this->load->view("desktop/header_front"); ?>
 		<!-- header include -->
 		<div class="body_container">
 
@@ -18,11 +21,11 @@
 						col-lg-2">
 				<ul>
 					<li>最新文章 ： </li>
-					<?php foreach ($newest_article as $key => $article) { ?>
+					<?php foreach ($newest_article as $key => $na) { ?>
 						<li 
 						style="cursor: pointer;"
-						onclick="window.location='<?php base_url(); ?>articles/<?php echo $article['a_id']; ?>'">
-							<?php echo $article['a_title']; ?>
+						onclick="window.location='<?php base_url(); ?>articles/<?php echo $na['a_id']; ?>'">
+							<?php echo $na['a_title']; ?>
 							
 						</li>
 					<?php } ?>
@@ -33,24 +36,24 @@
 			<div class="container content
 						col-lg-8">
 				<?php 
-					foreach ($article_data as $key => $article) {
+					foreach ($articles as $key => $arts) {
 				 ?>
 						<div class="data_container 
 									col-lg-4">
 							<div class="data">
-								<h2><?php echo $article['a_title']; ?></h2>
+								<h2><?php echo $arts['a_title']; ?></h2>
 								<div class="time_class">
-									<p><?php echo $article['a_datetime']; ?></p>
-									<p><?php echo $article['c_title']; ?></p>
+									<p><?php echo $arts['a_datetime']; ?></p>
+									<p><?php echo $arts['c_title']; ?></p>
 								</div>
 								<div class="img">
-									<img src="<?php echo $article['a_img']; ?>">
+									<img src="<?php echo $arts['a_img']; ?>">
 								</div>
 								<div class="info">
 									
 								</div>
 								<div class="read_more">
-									<button class="btn btn-default" onclick="window.location='<?php base_url(); ?>articles/<?php echo $article['a_id']; ?>'">
+									<button class="btn btn-default" onclick="window.location='<?php base_url(); ?>articles/<?php echo $arts['a_id']; ?>'">
 										READ MORE
 									</button>
 								</div>
@@ -61,34 +64,14 @@
 				
 				<div class="pagination_container
 							col-lg-12">
-					<ul class="pagination pagination-sm">
-						
-						<?php if ($num_page > 1){ ?>
-					 		<li><a href="<?php echo base_url(); ?>home/1">&laquo;</a></li>
-					 	<?php } ?>
-					 	<?php
-					 		for ($i = (($num_page - $range) - 1); $i < (($num_page + $range) + 1) ; $i++) { 
-					 			if (($i > 0) and ($i <= $total_page)) {
-					 				if ($i == $num_page) { ?>
-					 					<li class="active"><a href="javascript:;"><?php echo $num_page; ?></a></li>
-					 				<?php } else { ?>
-										<li><a href="<?php echo base_url(); ?>home/<?php echo $i; ?>"><?php echo $i; ?></a></li>
-					 				<?php }
-					 			}
-					 		}
-					 	 ?>
-					  	
-						<?php if ($num_page < $total_page) { ?>
-					  		<li><a href="<?php echo base_url(); ?>home/<?php echo $total_page; ?>">&raquo;</a></li>
-					  	<?php } ?>
-					</ul>
+					<?php $this->load->view("desktop/pagination"); ?>
 				</div>
 			</div>
 
 
 		</div>
 		
-		
+		<?php $this->load->view("desktop/footer_front"); ?>
 
 		<script>var base_url = "<?php echo base_url(); ?>";</script>
 		<script src="<?php echo base_url(); ?>assets/js/index.js"></script>

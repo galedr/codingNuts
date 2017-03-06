@@ -32,10 +32,10 @@ function ckeditor(){
 
 		//change後變更變選取的css狀態
 
-		$('label[for="'+label_id+'"]').css('background-color','#FF8800');
-		$('label[for="'+label_id+'"]').css('color','white');
+		$('label[for="cate_'+label_id+'"]').css('background-color','#FF8800');
+		$('label[for="cate_'+label_id+'"]').css('color','white');
 
-		//選取後變更 input 內的 value
+		//選取後變更 input 的 value
 
 		$('input[name="insertClass"]').attr('value',label_id);
 		
@@ -69,11 +69,13 @@ function ckeditor(){
 
 	$('#insertTag_submit').click(function(){
 
-		$('.postTag_set').css('display','none');
-
 		var post_tag = $('#insertTag').val();
 
 		$('#postTag').html(post_tag);
+
+		$('.postTag_set').css('display','none');
+
+		$('.postTag').css('background-color','white');
 
 	})
 
@@ -112,7 +114,7 @@ function ckeditor(){
 
 		$.ajax({
 
-			url: base_url+'tag_search',
+			url: base_url+'new_article/tag_search',
 			data: {search_text:search_text},
 			type: 'POST',
 			dataType: 'JSON',
@@ -122,7 +124,7 @@ function ckeditor(){
 				}
 			}
 
-		})//end of ajax
+		})
 
 	})
 
@@ -156,6 +158,7 @@ function ckeditor(){
 			// console.log(aa);
 		}
 	}
+
 
 
 	//設定日期
@@ -221,6 +224,15 @@ function ckeditor(){
 
 }
 
-
+function submit_check(form)
+{	
+	if (form.postTitle.value == '' || form.a_intro == '') {
+		var error = "文章標題，主要圖片，文章簡介為必填欄位";
+		alert(error);
+	} else {
+		form.submit();
+	}
+	
+}
 
 window.addEventListener('load',ckeditor);
