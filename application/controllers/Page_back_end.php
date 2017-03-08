@@ -51,9 +51,15 @@ class Page_back_end extends MY_Controller
 		header("location:".base_url()."back_end");
 	}
 
+	public function admin_logout()
+	{
+		$this->setsession->admin_unset();
+		header("location:".base_url());
+	}
+
 	public function output_list()
 	{
-		
+
 	}
 
 }
