@@ -58,8 +58,8 @@ $route['tag/(:any)'] = 'Page_index/search/$1';
 $route['articles/(:any)'] = 'Page_article/make_content/$1';
 
 // 後台
-$route['back_end'] = 'Page_back_end/back_end_index';
-$route['back_end/(:num)'] = 'Page_back_end/back_end_index_pagi/$1';
+$route['back_end'] = 'Page_back_end/output_list';
+$route['back_end/(:num)'] = 'Page_back_end/list_pagination/$1';
 $route['back_end/category/(:any)'] = 'Page_back_end/back_end_search/$1';
 $route['back_end/tag/(:any)'] = 'Page_back_end/back_end_search/$1';
 

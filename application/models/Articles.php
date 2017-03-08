@@ -69,7 +69,7 @@ class Articles extends CI_Model
 
 		return;
 	}
-
+	
 
 }
 ?>

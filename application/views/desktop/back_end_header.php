@@ -17,10 +17,10 @@
 		<p>nowAction</p>
 	</div>
 	<div class="adminStatus">
-		<p>Welcome, <?php echo $admin[0]['a_nickname']; ?></p>
+		<p>Welcome, <?php echo $admin['a_nickname']; ?></p>
 		<p>
 			<a href="<?php echo base_url(); ?>admin_logout">登出</a>
 		</p>
-		<img src="<?php echo $admin[0]['a_img']; ?>" id="adminImg">
+		<img src="<?php echo $admin['a_img']; ?>" id="adminImg">
 	</div>
 </div>
