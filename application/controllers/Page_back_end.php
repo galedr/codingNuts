@@ -165,7 +165,71 @@ class Page_back_end extends MY_Controller
 		$this->load->view('desktop/back_end_index', $data);
 	}
 
-	
+	public function search($num_page = 1)
+	{
+		$s_key = $_GET['s_key'];
+		if (empty($_GET['s_val'])) {
+			$data['error_message'] = "請輸入查詢關鍵字";
+			$data['redirect'] = base_url()."back_end";
+			$this->load->view('desktop/error_page', $data);
+			return;
+		}
+		$s_val = $_GET['s_val'];
+
+		$data = array();
+
+		$this->load->Model('articles');
+
+		if ($s_key == 'category') {
+			$all_article = $this->articles->search_by_category($s_val);
+		} elseif ($s_key == 'tag') {
+			$all_article = $this->articles->search_by_tag($s_val);
+		}
+
+		$per_page = 10;
+
+		$start_row = ($num_page - 1)*$per_page;
+
+		$total_rows = count($all_article);
+
+		$total_pages = ceil($total_rows/$per_page);
+
+		$args = array('back_end','search');
+
+		$query = array('s_key' => $s_key, 's_val' => $s_val);
+
+		$data['num_page'] = $num_page;
+
+		$data['total_pages'] = $total_pages;
+
+		$data['articles'] = array_slice($all_article, $start_row, $per_page);
+
+		$data['pagination'] = $this->pagination($total_rows, $per_page, $num_page, $args, $query);
+
+		// 全部文章 and 已發佈文章數量
+
+		$data['num_all_article'] = $total_rows;
+		$posted_count = 0;
+		foreach ($data['articles'] as $key => $val) {
+			if ($val['a_status'] == 1) {
+				$posted_count += 1;
+			}
+		}
+		$data['num_posted_article'] = $posted_count;
+
+		// 取出分類列表
+
+		$this->load->Model('category');
+
+		$data['categories'] = $this->category->get_all();
+
+		// 取出管理者資料
+
+		$data['admin'] = $_SESSION['codingNuts_admin'];
+
+		$this->load->view('desktop/back_end_index', $data);	
+
+	}
 
 }
 
