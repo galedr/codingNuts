@@ -32,8 +32,8 @@
 				<div class="controlArea
 							col-lg-4">
 					<div>
-						<img src="<?php echo $admin[0]['a_img']; ?>">
-						<p>以 <?php echo $admin[0]['a_nickname']; ?> 的身份張貼</p>
+						<img src="<?php echo $admin['a_img']; ?>">
+						<p>以 <?php echo $admin['a_nickname']; ?> 的身份張貼</p>
 					</div>
 					<button class="btn btn-default" id="submitPost" type="button" onclick="submit_check(this.form)">發佈</button>
 				</div>

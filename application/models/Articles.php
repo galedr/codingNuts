@@ -88,6 +88,21 @@ class Articles extends CI_Model
 		return;
 	}
 
+	public function do_update($db_arr, $a_id)
+	{
+		$db_arr = array_intersect_key($db_arr, $this->db_col);
+		$update_query = array();
+		foreach ($db_arr as $key => $val) {
+			$update_query[] = $key."="."'$val'";
+		}
+		$update_query = implode(",", $update_query);
+
+		$query = "UPDATE article SET ".$update_query."WHERE a_id="."'$a_id'";
+		$rec = $this->db->query($query);
+
+		return;
+	}
+
 
 }
 ?>
