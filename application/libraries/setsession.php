@@ -13,7 +13,9 @@ class Setsession
 	public function admin_set($admin, $data)
 	{
 		foreach ($data[0] as $key => $val) {
-			$_SESSION[$admin][$key] = $val;
+			if ($key != 'a_password') {
+				$_SESSION[$admin][$key] = $val;
+			}// end of if
 		}
 	}
 
