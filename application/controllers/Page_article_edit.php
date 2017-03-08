@@ -45,7 +45,7 @@ class Page_article_edit extends CI_Controller
 		$db_arr = array();
 		$db_arr['a_title'] = $_POST['postTitle'];
 		$db_arr['c_title'] = $_POST['insertClass'];
-		$da_arr['a_intro'] = $_POST['a_intro'];
+		$db_arr['a_intro'] = $_POST['a_intro'];
 		$db_arr['a_content'] = $_POST['postContent'];
 		$a_img_tmp = $_FILES['a_img']['tmp_name'];
 		$a_img_name = $_FILES['a_img']['name'];
@@ -61,7 +61,7 @@ class Page_article_edit extends CI_Controller
 		header("location:".base_url()."back_end");
 	}
 
-	public function update_route()
+	public function update_route($a_id)
 	{
 		$this->load->Model('articles');
 		$data['article'] = $this->articles->search_by_id($a_id);
