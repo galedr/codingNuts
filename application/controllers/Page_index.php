@@ -43,7 +43,7 @@ class Page_index extends CI_Controller
 
 		$this->load->Model('category');
 
-		$data['category'] = $this->category->all_category();
+		$data['category'] = $this->category->get_all();
 
 		// 最新文章
 
@@ -51,7 +51,7 @@ class Page_index extends CI_Controller
 
 		$this->load->Model('articles');
 
-		$data['newest_article'] = $this->articles->newest_article($row_out_num);
+		$data['newest_article'] = $this->articles->get_newest($row_out_num);
 
 
 
