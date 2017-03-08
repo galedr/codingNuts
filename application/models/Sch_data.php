@@ -49,6 +49,28 @@ class Sch_data extends CI_Controller
 		$this->category->reset_ac($ac);	
 	}
 
+	public function set_tag()
+	{
+		$this->load->Model('articles');
+		$this->load->Model('tag');
+		$articles = $this->articles->get_all();
+		$t_title = array();
+		foreach ($articles as $key => $tag_str) {
+			$tag = explode(",", $tag_str['a_tag']);
+			foreach ($tag as $key => $title) {
+				$t_title[] = $title;
+			}
+		}
+
+		$t_title = array_unique($t_title);
+		$this->tag->reset($t_title);
+	}
+
+	public function set_article_tag()
+	{
+		
+	}
+
 }
 
 ?>

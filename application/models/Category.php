@@ -15,9 +15,9 @@ class Category extends CI_Model
 		return $result;
 	}
 
-	public function search_by_title($t_title)
+	public function search_by_title($c_title)
 	{
-		$query = "SELECT * FROM category WHERE t_title = '$t_title'";
+		$query = "SELECT * FROM category WHERE c_title = '$c_title'";
 		$rec = $this->db->query($query);
 		$result = $rec->result_array($rec);
 

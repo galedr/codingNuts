@@ -14,5 +14,17 @@ class Tag extends CI_Model
 
 		return $result;
 	}
+
+	public function reset($t_title)
+	{
+		$this->db->query('TRUNCATE TABLE article_tag');
+
+		foreach ($at as $key => $val) {
+			$query = "INSERT INTO article_tag (a_id, t_id) VALUES ('".$val['a_id']."','".$val['t_id']."')";
+			$rec = $this->db->query($query);
+		}
+
+		return;
+	}
 }
 ?> 
