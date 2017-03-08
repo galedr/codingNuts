@@ -33,6 +33,22 @@ class Sch_data extends CI_Controller
 		$this->category->reset($categories);
 	}
 
+	public function set_article_category()
+	{
+		$this->load->Model('articles');
+		$this->load->Model('category');
+		$articles = $this->articles->get_all();
+		$c_id = "";
+		$ac = array();
+		foreach ($articles as $key => $art) {
+			$cate = $this->category->search_by_title($art['c_title']);
+			$c_id = $cate[0]['c_id'];
+			$ac[] = array('a_id' => $art['a_id'], 'c_id' => $c_id); 	
+		}
+
+		$this->category->reset_ac($ac);	
+	}
+
 }
 
 ?>

@@ -15,12 +15,31 @@ class Category extends CI_Model
 		return $result;
 	}
 
+	public function search_by_title($t_title)
+	{
+		$query = "SELECT * FROM category WHERE t_title = '$t_title'";
+		$rec = $this->db->query($query);
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
 	public function reset($cates)
 	{
 		$this->db->query('TRUNCATE TABLE category');
 
 		foreach ($categories as $key => $cate) {
 			$query = "INSERT INTO category (c_title) VALUES ('".$cate."')";
+			$rec = $this->db->query($query);
+		}// end of foreach
+	}
+
+	public function reset_ac($ac)
+	{
+		$this->db->query('TRUNCATE TABLE article_category');
+
+		foreach ($ac as $key => $val) {
+			$query = "INSERT INTO article_category (c_id, a_id) VALUES ('".$val['c_id']."','".$val['a_id']."')";
 			$rec = $this->db->query($query);
 		}// end of foreach
 	}
