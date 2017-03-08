@@ -230,6 +230,14 @@ class Page_back_end extends MY_Controller
 		$this->load->view('desktop/back_end_index', $data);	
 
 	}
+	
+	public function delete_post($a_id)
+	{
+		$this->load->Model('articles');
+		$this->articles->delete($a_id);
+
+		header("location:".base_url()."back_end");
+	}
 
 }
 

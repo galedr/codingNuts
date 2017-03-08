@@ -103,6 +103,13 @@ class Articles extends CI_Model
 		return;
 	}
 
+	public function delete($a_id)
+	{
+		$query = "DELETE FROM article WHERE a_id = '$a_id'";
+		$rec = $this->db->query($query);
+
+		return;
+	}
 
 }
 ?>

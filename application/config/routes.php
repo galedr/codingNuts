@@ -62,6 +62,7 @@ $route['back_end'] = 'Page_back_end/output_list';
 $route['back_end/(:num)'] = 'Page_back_end/list_pagination/$1';
 $route['back_end/category/(:any)'] = 'Page_back_end/search/$1';
 $route['back_end/tag/(:any)'] = 'Page_back_end/search/$1';
+$route['article_delete/(:any)'] = 'Page_back_end/delete_post/$1';
 
 // 管理者登入
 $route['back_end/admin_login'] = 'Page_back_end/admin_login_page';
@@ -75,7 +76,7 @@ $route['back_end/add_article'] = 'Page_article_edit/make_new';
 $route['edit_article/(:any)'] = 'Page_article_edit/update_route/$1';
 $route['article_update/(:any)'] = 'Page_article_edit/make_update/$1';
 
-$route['article_delete/(:any)'] = 'Page_article_edit/article_delete/$1';
+
 
 // test
 $route['test'] = 'Page_article_edit/make_new';
