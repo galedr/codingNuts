@@ -9,10 +9,9 @@ class Page_index extends CI_Controller
 
 		$this->load->library('setsession');
 
-		$this->load->helper('toolbox');
 	}
 
-	public function list()
+	public function all_list()
 	{	
 		$data = array();
 
@@ -37,7 +36,7 @@ class Page_index extends CI_Controller
 		// 文章與分頁
 		$data['articles'] = array_slice($all_article, $start_row, $per_page);
 
-		$data['pagination'] = pagination($total_rows, $per_page, $num_page, $args);
+		// $data['pagination'] = pagination($total_rows, $per_page, $num_page, $args);
 
 		// category 
 
