@@ -10,9 +10,11 @@ class Setsession
 		session_start();
 	}
 
-	public function admin_set($key, $value)
+	public function admin_set($admin, $data)
 	{
-		$_SESSION[$key] = $value;
+		foreach ($data[0] as $key => $val) {
+			$_SESSION[$admin][$key] = $val;
+		}
 	}
 
 	public function admin_unset()
