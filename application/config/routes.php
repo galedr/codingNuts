@@ -79,7 +79,7 @@ $route['article_update/(:any)'] = 'Page_article_edit/make_update/$1';
 
 
 // test
-$route['test'] = 'Page_article_edit/make_new';
+$route['test'] = 'Sch_data/get_articles';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
