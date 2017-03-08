@@ -35,6 +35,41 @@ class Articles extends CI_Model
 		return $result;
 	}
 
+	public function search_by_category($s_val)
+	{
+		$query = "SELECT * FROM article WHERE c_title = '$s_val' ORDER BY a_id DESC";
+		$rec = $this->db->query($query);
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
+	public function search_by_tag($s_val)
+	{
+		$query = "SELECT * FROM article WHERE a_tag LIKE '%$s_val%' ORDER BY a_id DESC";
+		$rec = $this->db->query($query);
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
+	public function search_by_id($a_id)
+	{
+		$query = "SELECT * FROM article WHERE a_id = '$a_id'";
+		$rec = $this->db->query($query);
+		$result = $rec->result_array($rec);
+
+		return $result;
+	}
+
+	public function update_check_num($a_id, $a_checknum)
+	{
+		$query = "UPDATE article SET a_checknum = '$a_checknum' WHERE a_id = '$a_id'";
+		$rec = $this->db->query($query);
+
+		return;
+	}
+
 
 }
 ?>

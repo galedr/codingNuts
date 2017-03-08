@@ -106,6 +106,7 @@ class Page_index extends MY_Controller
 		if (empty($_GET['s_val'])) {
 			$data['error_message'] = "請輸入搜尋資料";
 			$data['redirect'] = base_url();
+			$this->load->view('desktop/error_page', $data);
 			return;
 		}
 		$s_val = $_GET['s_val'];

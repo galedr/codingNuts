@@ -55,7 +55,7 @@ $route['category/(:any)'] = 'Page_index/search/$1';
 $route['tag/(:any)'] = 'Page_index/search/$1';
 
 // 文章內頁
-$route['articles/(:any)'] = 'Page_article/articles/$1';
+$route['articles/(:any)'] = 'Page_article/make_content/$1';
 
 // 後台
 $route['back_end'] = 'Page_back_end/back_end_index';
