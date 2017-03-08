@@ -69,7 +69,25 @@ class Articles extends CI_Model
 
 		return;
 	}
-	
+
+	public function make_new($db_arr)
+	{	
+		$db_arr = array_intersect_key($db_arr ,$this->db_col);
+		$insert_key = array();
+		$insert_val = array();
+		foreach ($db_arr as $key => $val) {
+			$insert_key[] = $key;
+			$insert_val[] = "'$val'";
+		}
+		$insert_key = implode(",", $insert_key);
+		$insert_val = implode(",", $insert_val);
+
+		$query = "INSERT INTO article (".$insert_key.") VALUES (".$insert_val.")";
+		$rec = $this->db->query($query);
+
+		return;
+	}
+
 
 }
 ?>

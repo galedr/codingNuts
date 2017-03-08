@@ -69,15 +69,15 @@ $route['admin_login'] = 'Page_back_end/admin_login';
 $route['admin_logout'] = 'Page_back_end/admin_logout';
 
 // 新增文章
-$route['back_end/new_article'] = 'Page_back_end/new_article';
-$route['new_article/tag_search'] = 'Page_back_end/tag_search';
-$route['back_end/add_article'] = 'Page_back_end/add_article';
+$route['back_end/new_article'] = 'Page_article_edit/set_route';
+$route['new_article/tag_search'] = 'Page_article_edit/tag_search';
+$route['back_end/add_article'] = 'Page_article_edit/make_new';
 $route['edit_article/(:any)'] = 'Page_back_end/edit_article_page/$1';
 $route['article_update/(:any)'] = 'Page_back_end/edit_article_update/$1';
 $route['article_delete/(:any)'] = 'Page_back_end/article_delete/$1';
 
 // test
-$route['test'] = 'Page_index/test';
+$route['test'] = 'Page_article_edit/make_new';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
