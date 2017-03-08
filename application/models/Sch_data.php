@@ -17,6 +17,22 @@ class Sch_data extends CI_Controller
 		file_put_contents("json_files/all_article.json", $data);
 	}
 
+	public function set_category()
+	{
+		$this->load->Model('articles');
+		$result = $this->articles->get_all();
+		$categories = array();
+
+		foreach ($result as $key => $cate) {
+			$categories[] = $cate['c_title']; 
+		}
+
+		$categories = array_unique($categories);
+
+		$this->load->Model('category');
+		$this->category->reset($categories);
+	}
+
 }
 
 ?>
