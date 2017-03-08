@@ -61,9 +61,22 @@ class Page_article_edit extends CI_Controller
 		header("location:".base_url()."back_end");
 	}
 
-	public function update()
+	public function update_route()
 	{
-		
+		$this->load->Model('articles');
+		$data['article'] = $this->articles->search_by_id($a_id);
+
+		// 取出管理者資料
+
+		$data['admin'] = $_SESSION['codingNuts_admin'];
+
+		// 取出分類列表
+
+		$this->load->Model('category');
+
+		$data['categories'] = $this->category->get_all();
+
+		$this->load->view('desktop/article_edit', $data);
 	}
 
 }
