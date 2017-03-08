@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Page_index extends CI_Controller 
+require_once(APPPATH."controllers/MY_Controller.php");
+
+class Page_index extends MY_Controller 
 {
 	public function __construct()
 	{
@@ -36,7 +38,7 @@ class Page_index extends CI_Controller
 		// 文章與分頁
 		$data['articles'] = array_slice($all_article, $start_row, $per_page);
 
-		// $data['pagination'] = pagination($total_rows, $per_page, $num_page, $args);
+		$data['pagination'] = $this->pagination($total_rows, $per_page, $num_page, $args);
 
 		// category 
 
