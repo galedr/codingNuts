@@ -51,8 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'Page_index/output_list';
 $route['index/(:any)'] = 'Page_index/list_pagination/$1'; //首頁分頁
-$route['category/(:any)'] = 'Page_index/index_search/$1';
-$route['tag/(:any)'] = 'Page_index/index_search/$1';
+$route['category/(:any)'] = 'Page_index/search/$1';
+$route['tag/(:any)'] = 'Page_index/search/$1';
 
 // 文章內頁
 $route['articles/(:any)'] = 'Page_article/articles/$1';
