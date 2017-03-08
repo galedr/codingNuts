@@ -1,6 +1,17 @@
 <?php
 class Articles extends CI_Model
-{
+{	
+	public $db_col = array(
+					"a_title" => '',
+					"c_title" => '',
+					"a_intro" => '',
+					"a_content" => '',
+					"a_img" => '',
+					"a_nickname" => '',
+					"a_tag" => '',
+					"a_datetime" => '',
+					);
+
 	public function __construct()
 	{
 		$this->load->database();
@@ -23,6 +34,7 @@ class Articles extends CI_Model
 
 		return $result;
 	}
+
 
 }
 ?>

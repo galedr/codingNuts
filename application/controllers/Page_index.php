@@ -101,5 +101,6 @@ class Page_index extends MY_Controller
 		$this->load->view("desktop/index", $data);
 	}
 
+
 }
 ?>

@@ -77,7 +77,7 @@ $route['article_update/(:any)'] = 'Page_back_end/edit_article_update/$1';
 $route['article_delete/(:any)'] = 'Page_back_end/article_delete/$1';
 
 // test
-$route['test'] = 'My_controller/pagination';
+$route['test'] = 'Page_index/test';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
