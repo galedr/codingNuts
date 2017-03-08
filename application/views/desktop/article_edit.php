@@ -9,9 +9,8 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/article_edit.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/back_end_header.css">
 		<script src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
-		<script src="<?php echo base_url(); ?>assets/tools/ckfinder/ckfinder.js"></script>
-		<script src="<?php echo base_url(); ?>assets/tools/ckeditor/ckeditor.js"></script>
-		<script src="<?php echo base_url(); ?>assets/js/article_edit.js"></script>
+		<script src="<?php echo base_url(); ?>assets/tools/tinymce/tinymce.min.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/update_article.js"></script>
 	</head>
 	<body>
 

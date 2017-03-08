@@ -128,7 +128,7 @@
 							</td>
 							<td class="view_num">
 								<img src="<?php echo base_url(); ?>assets/websiteImg/view.png">
-								瀏覽數
+								<?php echo $arts['a_checknum']; ?>
 							</td>
 							<td class="post_time"><?php echo $arts['a_datetime']; ?></td>
 						</tr>
