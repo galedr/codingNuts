@@ -170,69 +170,6 @@ function get_start(){
 		}
 	}
 
-
-
-	//設定日期
-
-	// $('.postDate').click(function(){
-
-	// 	$('.set_postDate').css('display','block');
-
-	// 	$('.postDate').css('background-color','#FFEE99');
-
-	// })
-
-	// //日期radio事件，決定現在或設定日期
-
-	// $('input[name="setDate"]').change(function(){
-
-	// 	var setDate_way = $('input[name="setDate"]:checked').val();
-
-	// 	if (setDate_way == 'choose') {
-
-	// 		$('.chooseDate').css('display','block');
-
-	// 	} else {
-
-	// 		$('.chooseDate').css('display','none');
-
-	// 	}
-
-	// })
-
-	// //選擇日期
-
-	// $('.setDate_submit').click(function(){
-
-	// 	var setDate_way = $('input[name="setDate"]:checked').val();
-		
-	// 	if (setDate_way == 'now') {
-
-	// 		$('#postTime').html('立刻發佈');
-
-	// 	} else {
-
-	// 		var chooseDate = $('input[name="postDate"]').val();
-	// 		console.log(chooseDate);
-	// 		var today = getDate();
-	// 		console.log(today);
-	// 		if (chooseDate < today) {
-	// 			alert('選則的日期必須是今天以後');
-	// 			$('input[value="now"]').attr('checked','checked');
-	// 		} else {
-	// 			$('#postTime').html(chooseDate);	
-	// 		}
-
-	// 	}
-
-	// 	$('.set_postDate').css('display','none');
-	// 	$('.postDate').css('background-color','white');
-	// 	$('.chooseDate').css('display','none');
-
-	// })
-
-	//發佈鈕按下後事件
-
 }
 
 function submit_check(form)
