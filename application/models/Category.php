@@ -28,7 +28,7 @@ class Category extends CI_Model
 	{
 		$this->db->query('TRUNCATE TABLE category');
 
-		foreach ($categories as $key => $cate) {
+		foreach ($cates as $key => $cate) {
 			$query = "INSERT INTO category (c_title) VALUES ('".$cate."')";
 			$rec = $this->db->query($query);
 		}// end of foreach

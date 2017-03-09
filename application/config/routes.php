@@ -76,7 +76,7 @@ $route['back_end/add_article'] = 'Page_article_edit/make_new';
 $route['edit_article/(:any)'] = 'Page_article_edit/update_route/$1';
 $route['article_update/(:any)'] = 'Page_article_edit/make_update/$1';
 
-
+$route['test'] = 'Sch_data/set_article_category';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
