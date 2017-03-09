@@ -13,14 +13,7 @@ function get_start(){
 				  ],
 
   			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
-			// plugins: [
-		 //        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-		 //        "searchreplace wordcount visualblocks visualchars code fullscreen",
-		 //        "insertdatetime media nonbreaking save table contextmenu directionality",
-		 //        "emoticons template paste textcolor colorpicker textpattern imagetools advlist autolink jbimages"
-		 //    ],
-		 //    toolbar1: "insertfile undo redo | formatselect fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table hr pagebreak blockquote",
-		 //    toolbar2: "bold italic underline strikethrough subscript superscript | forecolor backcolor charmap emoticons | link image jbimages media | cut copy paste | insertdatetime fullscreen code",
+
 		    menubar: false,
 		image_advtab: true,
 	});
