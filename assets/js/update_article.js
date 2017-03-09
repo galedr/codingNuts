@@ -244,7 +244,7 @@ function get_start(){
 
 function submit_check(form)
 {	
-	if (form.postTitle.value == '' || form.a_intro == '') {
+	if (form.postTitle.value == '' || form.a_intro.value == '') {
 		var error = "文章標題，主要圖片，文章簡介為必填欄位";
 		alert(error);
 	} else {
