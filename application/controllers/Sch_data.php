@@ -75,7 +75,7 @@ class Sch_data extends CI_Controller
 		foreach ($articles as $key => $a_id) {
 			$tags = explode(",", $a_id['a_tag']);
 			foreach ($tags as $t_title) {
-				$tag = $this->tag->search($t_title);
+				$tag = $this->tag->accurate_search($t_title);
 				$t_id = $tag[0]['t_id'];
 				$at[] = array('a_id' => $a_id['a_id'], 't_id' => $t_id);
 			}
