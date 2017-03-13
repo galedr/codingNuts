@@ -57,7 +57,7 @@ class Page_back_end extends MY_Controller
 		header("location:".base_url());
 	}
 
-	public function output_list()
+	public function output_list($num_page = null)
 	{
 		$data = array();
 
@@ -67,60 +67,7 @@ class Page_back_end extends MY_Controller
 
 		$per_page = 10;
 
-		$num_page = 1;
-
-		$start_row = ($num_page - 1)*$per_page;
-
-		$total_rows = count($all_article);
-
-		$total_pages = ceil($total_rows/$per_page);
-
-		$args = array('back_end');
-
-		// 文章與分頁
-
-		$data['num_page'] = $num_page;
-
-		$data['total_pages'] = $total_pages;
-
-		$data['articles'] = array_slice($all_article, $start_row, $per_page);
-
-		$data['pagination'] = $this->pagination($total_rows, $per_page, $num_page, $args);
-
-		// 全部文章 and 已發佈文章數量
-
-		$data['num_all_article'] = $total_rows;
-		$posted_count = 0;
-		foreach ($data['articles'] as $key => $val) {
-			if ($val['a_status'] == 1) {
-				$posted_count += 1;
-			}
-		}
-		$data['num_posted_article'] = $posted_count;
-
-		// 取出分類列表
-
-		$this->load->Model('category');
-
-		$data['categories'] = $this->category->get_all();
-
-		// 取出管理者資料
-
-		$data['admin'] = $_SESSION['codingNuts_admin'];
-
-
-		$this->load->view('desktop/back_end_index', $data);
-	}
-
-	public function list_pagination($num_page)
-	{
-		$data = array();
-
-		$this->load->Model('articles');
-
-		$all_article = $this->articles->get_all();	
-
-		$per_page = 10;
+		$num_page = (empty($num_page)) ? 1 : $num_page;
 
 		$start_row = ($num_page - 1)*$per_page;
 
