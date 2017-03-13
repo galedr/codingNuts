@@ -53,7 +53,7 @@
 									
 								</div>
 								<div class="read_more">
-									<button class="btn btn-default" onclick="window.location='<?php base_url(); ?>articles/<?php echo $arts['a_id']; ?>'">
+									<button class="btn btn-default" onclick="window.location='<?php echo base_url(); ?>articles/<?php echo $arts['a_id']; ?>'">
 										READ MORE
 									</button>
 								</div>

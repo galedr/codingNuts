@@ -13,13 +13,13 @@ class Page_index extends MY_Controller
 
 	}
 
-	public function output_list()
+	public function output_list($num_page = null)
 	{	
 		$data = array();
 
-		$per_page = 9;
+		$per_page = 2;
 
-		$num_page = 1;
+		$num_page = (empty($num_page)) ? 1 : $num_page; 
 
 		$start_row = ($num_page - 1) * $per_page;
 
@@ -48,56 +48,11 @@ class Page_index extends MY_Controller
 
 		// 最新文章
 
-		$row_out_num = 7; //取出最新文章筆數
-
-		$this->load->Model('articles');
-
-		$data['newest_article'] = $this->articles->get_newest($row_out_num);
+		$data['newest_article'] = $this->newest_article();
 
 
 		$this->load->view("desktop/index", $data);
 		
-	}
-
-	public function list_pagination($num_page)
-	{
-		$data = array();
-
-		$per_page = 9;
-
-		$start_row = ($num_page - 1) * $per_page;
-
-		$this->load->Model('articles');
-
-		$all_article = $this->articles->get_all();
-
-		$total_rows = count($all_article); 
-
-		$total_pages = ceil($total_rows / $per_page); 
-
-		$args = array("index");
-
-		// 文章與分頁
-		$data['articles'] = array_slice($all_article, $start_row, $per_page);
-
-		$data['pagination'] = $this->pagination($total_rows, $per_page, $num_page, $args);
-
-		// category 
-
-		$this->load->Model('category');
-
-		$data['category'] = $this->category->get_all();
-
-		// 最新文章
-
-		$row_out_num = 7; //取出最新文章筆數
-
-		$this->load->Model('articles');
-
-		$data['newest_article'] = $this->articles->get_newest($row_out_num);
-
-
-		$this->load->view("desktop/index", $data);
 	}
 
 	public function search($num_page = 1)
