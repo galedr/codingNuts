@@ -6,6 +6,17 @@ class Sch_data extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->check_cli();
+	}
+
+	public function check_cli()
+	{
+		if (PHP_SAPI != 'cli') {
+			echo "this operate is not avalible";
+			exit;
+		}
+		return;
 	}
 
 	public function get_articles()
